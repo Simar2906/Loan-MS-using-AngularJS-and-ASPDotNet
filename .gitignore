@@ -1,0 +1,90 @@
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+
+# Visual Studio directories
+.vs/
+/bin/
+/obj/
+/*.suo
+/*.user
+/*.userosscache
+/*.sln.docstates
+
+# ReSharper
+_ReSharper*/
+*.sln.ide
+*.sln.iml
+
+# Rider
+.idea/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# Node
+node_modules/
+
+# Compiled TypeScript
+*.js
+*.js.map
+
+# Angular
+/dist/
+/tmp/
+
+# .NET Scaffolding
+bin/
+obj/
+
+# ASP.NET
+*.suo
+*.user
+*.dll
+*.pdb
+*.cache
+*.log
+*.vspscc
+*.pidb
+*.svclog
+*.ipch/
+obj/
+Bin/
