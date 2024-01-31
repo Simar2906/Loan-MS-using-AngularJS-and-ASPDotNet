@@ -7,4 +7,9 @@
     <RootNamespace>Loan_Management_System</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="src\app\" />
+    <Folder Include="src\assets\" />
+  </ItemGroup>
+
 </Project>
