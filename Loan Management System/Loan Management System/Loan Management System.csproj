@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="src\app\Customer\" />
+    <Folder Include="src\app\Manager\" />
     <Folder Include="src\assets\" />
   </ItemGroup>
 

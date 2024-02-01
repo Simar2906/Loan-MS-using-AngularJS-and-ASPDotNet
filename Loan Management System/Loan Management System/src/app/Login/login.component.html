@@ -1,10 +1,20 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+﻿<link  rel="stylesheet" href="app/Login/login.component.css"/>
+<div class="custContainer">
+    <div class="actualForm">
+        <div class="typeText">Please Enter Your Login Details:-</div>
+        <div class="formCard">
+            <div class="typeText formTitle">Login</div>
+            <form class="subTypeText formContents" ng-submit="loginProcedure()">
+                <div>
+                    <label class="formLabel" for="email" ng-model="loginData.email">Email</label><br>
+                    <input type="text" name="email" id="email">
+                </div>
+                <div>
+                    <label class="formLabel" for="pwd" ng-model="loginData.password">Password</label><br>
+                    <input type="password" name="password" id="pwd">
+                </div>
+                <input type="submit" name="" id="" value="Login">
+            </form>
+        </div>
+    </div>
+</div>

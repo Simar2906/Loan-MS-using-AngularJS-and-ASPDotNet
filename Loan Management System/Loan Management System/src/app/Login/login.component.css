@@ -1,0 +1,40 @@
+﻿.formContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.actualForm {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    align-items: flex-start;
+}
+
+.formCard {
+    background-color: #436fa4;
+    border: 2px solid #101324;
+    align-self: center;
+    color: white;
+    text-shadow: 0 0px 15px #1d3557;
+}
+
+.formTitle {
+    text-align: center;
+    padding-bottom: 0.75rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0px 15px #1d3557;
+    box-shadow: 0 6px 12px -2px #1d3557
+}
+
+.formContents {
+    padding: 1rem 2rem;
+}
+
+.formLabel {
+    color: white;
+}
+
+input {
+    font-size: 1rem;
+}
