@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.FileProviders;
+﻿using Loan_Management_System.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 namespace Loan_Management_System
 {
@@ -7,6 +9,19 @@ namespace Loan_Management_System
         public static void ConfigureWebHost(IWebHostBuilder webBuilder)
         {
             webBuilder.UseStartup<StartupConfig>();
+        }
+
+        public IConfiguration Configuration { get; }
+
+        public StartupConfig(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
