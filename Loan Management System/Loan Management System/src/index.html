@@ -8,26 +8,27 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+    <link rel="stylesheet" href="globalStyle.css" />
     <script src="main.js"></script>
     <script src="app/Services/login.service.js"></script>
     <script src="app/Login/login.component.js"></script>
     <script src="app/Home/home.component.js"></script>
 
-    <link rel="stylesheet" href="globalStyle.css" />
+    
 </head>
 <body ng-controller="AppCtrl">
-    <div>
-        <div ng-click="goToHome()">Simar's Loan Company</div>
+    <div class="pageTitleRibbon">
+        <div class="pageTitle"><div class="titleContent" ng-click="goToHome()">Simar's Loan Company</div></div>
         <div>A sub Division of Simar Industries</div>
     </div>
-    <div>
+    <div class="actionsPanel">
         <div>
-            <button ng-if="showDashboardLink && isHomeRoute()">Go to your Dashboard</button>
+            <a class="logButtons" ng-if="showDashboardLink && isHomeRoute()">Go to your Dashboard</a>
         </div>
         <div ng-cloak>
-            <div ng-if="loginStatus">Welcome {{userName}}!</div>
-            <button ng-if="!loginStatus" ng-click="redirectToLogin()">Login</button>
-            <button ng-if="loginStatus" >Logout</button>
+            <div class="welcomeMessage" ng-if="loginStatus">Welcome {{userName}}!</div>
+            <a class="logButtons" ng-if="!loginStatus" ng-click="redirectToLogin()">Login</a>
+            <a class="logButtons" ng-if="loginStatus" >Logout</a>
         </div>
     </div>
     <hr />

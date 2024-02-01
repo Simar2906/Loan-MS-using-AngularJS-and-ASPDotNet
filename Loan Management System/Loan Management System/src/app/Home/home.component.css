@@ -1,0 +1,44 @@
+﻿.homeHeadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.homeHeading {
+    font-size: 7rem;
+    color: rgb(16, 19, 36);
+    font-weight: 700;
+    text-shadow: 0 0px 15px #1d3557;
+}
+
+.homeSubHeading {
+    font-size: 1.8rem;
+    margin-right: 20rem;
+    align-self: flex-end;
+    color: red
+}
+
+.subText {
+    margin-top: 7rem;
+    margin-right: 12rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.subTextTagline {
+    /* text-decoration:underline; */
+    font-size: 2.5rem;
+}
+
+.super {
+    vertical-align: super;
+    font-size: 0.5em;
+}
+
+.underText {
+    display: flex;
+    align-self: flex-end;
+}

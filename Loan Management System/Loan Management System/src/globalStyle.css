@@ -1,7 +1,115 @@
 ﻿[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
+* {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+.custContainer {
+    padding: 2rem 3rem;
+}
 
+.typeText {
+    font-size: 2rem;
+    color: rgb(16, 19, 36);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-body {
+.subTypeText {
+    font-size: 1.5rem;
+    color: rgb(16, 19, 36);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pageTitleRibbon {
+    display: flex;
+    /* height: 10vh; */
+    padding-block: 1rem 0rem;
+    background-color: #1d3557;
+    justify-content: space-between;
+    color: white;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px white solid;
+}
+
+.pageTitle {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    min-height: 30px;
+    padding-bottom: 0.8rem;
+    align-self: center;
+}
+
+.pageTitle .titleContent {
+    font-size: 2rem;
+    text-decoration: underline;
+    text-decoration-color: red;
+    user-select: none;
+    cursor: pointer;
+}
+
+.titleContent::after {
+    content: '®';
+    vertical-align: super;
+    font-size: 0.5em;
+    position: absolute;
+    top: 15px;
+}
+
+.sideText {
+    align-self: flex-end;
+}
+
+.actionsPanel {
+    color: white;
+    background-color: #375a85;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    /* height: 3vh; */
+    /* max-height: 30px; */
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.loginRightContainer {
+    display: flex;
+}
+
+.logButtons {
+    /* height: 30px; */
+    font-size: 1.25rem;
+    display: block;
+    text-decoration: none;
+    box-sizing: border-box;
+    background-color: #1d3557;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logButtons:hover {
+    background-color: rgb(177, 0, 0);
+    transition: background-color 0.5s;
+}
+
+.logButtons:active {
+    box-sizing: border-box;
+    box-shadow: inset 0px 0px 0px 1px #f00;
+    ;
+}
+
+.welcomeMessage {
+    font-size: 1.25rem;
+    margin-right: 2vw;
+    align-self: center;
+}
+
+@media(min-width:1024px) {
+    .pageTitle .titleContent {
+        font-size: 3rem;
+    }
 }
