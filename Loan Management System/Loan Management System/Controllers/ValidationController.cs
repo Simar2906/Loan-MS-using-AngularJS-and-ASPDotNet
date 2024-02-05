@@ -14,8 +14,8 @@ namespace Loan_Management_System.Controllers
         public ValidationController(UserRepository userRepo)
         {
             _userRepo = userRepo;
-        }   
-        
+        }
+        [HttpPost("ValidateUser")]
         public async Task<IActionResult> ValidateUser([FromBody] LoginFormData credentials)
         {
             try
@@ -23,11 +23,11 @@ namespace Loan_Management_System.Controllers
                 var user = await _userRepo.GetUser(credentials);
                 if(user == null)
                 {
-                    return Unauthorized("Incorrect Credentials!");
+                    return Unauthorized();
                 }
                 else
                 {
-                    return Ok("Logged in Successfully!");
+                    return Ok();
                 }
             }
             catch(Exception ex)

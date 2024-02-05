@@ -1,4 +1,5 @@
 ﻿using Loan_Management_System.Data;
+using Loan_Management_System.Repository.UserData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 
@@ -22,6 +23,8 @@ namespace Loan_Management_System
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<UserRepository>();
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,14 +42,11 @@ namespace Loan_Management_System
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseRouting();
-            // Map internal APIs
-            app.Map("/api", apiApp =>
+            // Map internal API
+            app.UseEndpoints(endpoints =>
             {
-                // Configure your internal APIs here
-                // For example: apiApp.UseEndpoints(endpoints => endpoints.MapControllers());
-                apiApp.UseEndpoints(endpoints => endpoints.MapControllers());
+                endpoints.MapControllers(); // Map API controllers
             });
-
             // Serve the AngularJS app from the "src" directory
             app.UseFileServer(new FileServerOptions
             {

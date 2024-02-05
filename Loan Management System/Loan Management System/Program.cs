@@ -6,6 +6,7 @@ namespace Loan_Management_System
         {
             var builder = CreateHostBuilder(args);
             builder.Build().Run();
+            var app = builder.Build();
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
