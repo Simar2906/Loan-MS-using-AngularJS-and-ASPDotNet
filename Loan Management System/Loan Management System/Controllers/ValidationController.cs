@@ -1,8 +1,13 @@
-﻿using Loan_Management_System.Data;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Loan_Management_System.Data;
+using Loan_Management_System.DTOs;
 using Loan_Management_System.Models;
 using Loan_Management_System.Repository.UserData;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Loan_Management_System.Controllers
 {
@@ -20,14 +25,15 @@ namespace Loan_Management_System.Controllers
         {
             try
             {
-                var user = await _userRepo.GetUser(credentials);
+                User user = await _userRepo.GetUser(credentials);
                 if(user == null)
                 {
                     return Unauthorized();
                 }
                 else
                 {
-                    return Ok();
+                    var token = GenerateToken(user);
+                    return Ok(new { Token = token });
                 }
             }
             catch(Exception ex)
@@ -35,6 +41,33 @@ namespace Loan_Management_System.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
         }
+        private string GenerateToken(User userDetails)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim("id", userDetails.Id.ToString()),
+                new Claim("email", userDetails.Email),
+                new Claim("name", userDetails.Name),
+                new Claim("gender", userDetails.Gender),
+                new Claim("password", userDetails.Password),
+                new Claim("role", userDetails.Role),
+                new Claim("salary", userDetails.Salary.ToString()),
+                new Claim("employer", userDetails.Employer),
+                new Claim("designation", userDetails.Designation),
+                new Claim("userPic", userDetails.UserPic)
+            };
+            var creds = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("abcdefgh12345678abcdefgh12345678")), SecurityAlgorithms.HmacSha256);
+            var expires = DateTime.Now.AddDays(Convert.ToDouble(7));
 
+            var token = new JwtSecurityToken(
+                "SimarAuthApi",
+                "SiamrLoanApp",
+                claims,
+                expires: expires,
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
     }
 }
