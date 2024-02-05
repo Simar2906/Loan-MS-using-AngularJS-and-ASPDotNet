@@ -1,19 +1,20 @@
 ﻿<link  rel="stylesheet" href="app/Login/login.component.css"/>
+<!--<script src="login.component.js"></script>-->
 <div class="custContainer">
     <div class="actualForm">
         <div class="typeText">Please Enter Your Login Details:-</div>
         <div class="formCard">
             <div class="typeText formTitle">Login</div>
-            <form class="subTypeText formContents" ng-submit="loginProcedure()">
+            <form novalidate class="subTypeText formContents">
                 <div>
-                    <label class="formLabel" for="email" ng-model="loginData.email">Email</label><br>
-                    <input type="text" name="email" id="email">
+                    <label class="formLabel" for="email" >Email</label><br>
+                    <input type="text" name="email" id="email" ng-model="loginData.email">
                 </div>
                 <div>
-                    <label class="formLabel" for="pwd" ng-model="loginData.password">Password</label><br>
-                    <input type="password" name="password" id="pwd">
+                    <label class="formLabel" for="pwd" >Password</label><br>
+                    <input type="password" name="password" id="pwd" ng-model="loginData.password">
                 </div>
-                <input type="submit" name="" id="" value="Login">
+                <input type="submit" name="" id="" value="Login" ng-click="loginProcedure()">
             </form>
         </div>
     </div>

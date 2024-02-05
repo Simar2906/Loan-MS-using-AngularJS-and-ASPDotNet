@@ -38,12 +38,13 @@ namespace Loan_Management_System
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
+            app.UseRouting();
             // Map internal APIs
             app.Map("/api", apiApp =>
             {
                 // Configure your internal APIs here
                 // For example: apiApp.UseEndpoints(endpoints => endpoints.MapControllers());
+                apiApp.UseEndpoints(endpoints => endpoints.MapControllers());
             });
 
             // Serve the AngularJS app from the "src" directory
