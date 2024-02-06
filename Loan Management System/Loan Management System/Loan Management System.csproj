@@ -8,9 +8,44 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="node_modules\.package-lock.json" />
+    <Content Include="node_modules\angular-jwt\.yo-rc.json" />
+    <Content Include="node_modules\angular-jwt\bower.json" />
+    <Content Include="node_modules\angular-jwt\LICENSE.txt" />
+    <Content Include="node_modules\angular-jwt\package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="src\app\Customer\" />
     <Folder Include="src\app\Manager\" />
     <Folder Include="src\assets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="node_modules\angular-jwt\.bowerrc" />
+    <None Include="node_modules\angular-jwt\.editorconfig" />
+    <None Include="node_modules\angular-jwt\.github\ISSUE_TEMPLATE.md" />
+    <None Include="node_modules\angular-jwt\.github\PULL_REQUEST_TEMPLATE.md" />
+    <None Include="node_modules\angular-jwt\.jshintrc" />
+    <None Include="node_modules\angular-jwt\dist\angular-jwt.js" />
+    <None Include="node_modules\angular-jwt\dist\angular-jwt.min.js" />
+    <None Include="node_modules\angular-jwt\gulpfile.js" />
+    <None Include="node_modules\angular-jwt\History.md" />
+    <None Include="node_modules\angular-jwt\index.js" />
+    <None Include="node_modules\angular-jwt\karma-dist-concatenated.conf.js" />
+    <None Include="node_modules\angular-jwt\karma-dist-minified.conf.js" />
+    <None Include="node_modules\angular-jwt\karma-src.conf.js" />
+    <None Include="node_modules\angular-jwt\README.md" />
+    <None Include="node_modules\angular-jwt\SECURITY-NOTICE.md" />
+    <None Include="node_modules\angular-jwt\src\angularJwt\angularJwt.js" />
+    <None Include="node_modules\angular-jwt\src\angularJwt\services\authManager.js" />
+    <None Include="node_modules\angular-jwt\src\angularJwt\services\interceptor.js" />
+    <None Include="node_modules\angular-jwt\src\angularJwt\services\jwt.js" />
+    <None Include="node_modules\angular-jwt\src\angularJwt\services\jwtOptions.js" />
+    <None Include="node_modules\angular-jwt\src\angularJwt\services\urlUtils.js" />
+    <None Include="node_modules\angular-jwt\test\unit\angularJwt\angularJwtSpec.js" />
+    <None Include="node_modules\angular-jwt\test\unit\angularJwt\services\interceptorSpec.js" />
+    <None Include="node_modules\angular-jwt\test\unit\angularJwt\services\jwtSpec.js" />
   </ItemGroup>
 
   <ItemGroup>
