@@ -64,7 +64,6 @@ _ReSharper*/
 node_modules/
 
 # Compiled TypeScript
-*.js
 *.js.map
 
 # Angular
