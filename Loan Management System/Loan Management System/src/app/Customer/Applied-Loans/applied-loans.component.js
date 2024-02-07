@@ -8,7 +8,7 @@
 //        transclude: true,
 //    };
 //});
-app.component('allLoans', {
+app.component('appliedLoans', {
     templateUrl: 'app/Customer/All-Loans/all-loans.component.html',
     controller: allLoansController
 });

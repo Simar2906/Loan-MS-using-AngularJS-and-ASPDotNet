@@ -9,13 +9,13 @@ app.config(function ($routeProvider, $locationProvider) {
             template: '<login></login>'
         })
         .when('/customer', {
-            template: '<customer ng-view="cust"></customer>'
+            template: '<customer></customer>'
         })
         .when('/customer/allLoans', {
-            template: '<all-loans></all-loans>'
+            template: '<customer></customer><all-loans></all-loans>'
         })
         .when('/customer/appliedLoans', {
-            template: '<applied-loans></applied-loans>'
+            template: '<customer></customer><applied-loans></applied-loans>'
         })
         .when('/manager', {
             template: '<manager></manager>'
