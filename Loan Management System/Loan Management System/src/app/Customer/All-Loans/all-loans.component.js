@@ -1,18 +1,10 @@
-﻿//app.directive('allLoans', function () {
-//    return {
-//        restrict: 'E',
-//        templateUrl: 'app/Customer/All-Loans/all-loans.component.html',
-//        controller: 'allLoansController',
-//        controllerAs: 'allLoansController',
-//        scope: {},
-//        transclude: true,
-//    };
-//});
-app.component('allLoans', {
+﻿app.component('allLoans', {
     templateUrl: 'app/Customer/All-Loans/all-loans.component.html',
     controller: allLoansController
 });
-
-function allLoansController() {
+allLoansController.$inject = ['scope'];
+function allLoansController($scope) {
     console.log('all loans opened');
+
+
 }
