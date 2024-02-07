@@ -14,6 +14,8 @@
     <script src="main.js"></script>
     <script src="app/Services/login.service.js"></script>
     <script src="app/Login/login.component.js"></script>
+    <script src="app/Customer/customer.component.js"></script>
+
     <script src="app/Home/home.component.js"></script>
 
 
@@ -30,7 +32,7 @@
         <div ng-cloak>
             <div class="welcomeMessage" ng-if="loginStatus">Welcome {{userName}}!</div>
             <a class="logButtons" ng-if="!loginStatus" ng-click="redirectToLogin()">Login</a>
-            <a class="logButtons" ng-if="loginStatus" >Logout</a>
+            <a class="logButtons" ng-if="loginStatus" ng-click="logout()">Logout</a>
         </div>
     </div>
     <hr />

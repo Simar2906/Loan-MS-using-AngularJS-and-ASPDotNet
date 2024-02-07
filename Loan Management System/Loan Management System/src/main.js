@@ -41,6 +41,14 @@ function AppCtrl($scope, $location, LoginService) {
             return false;
         }
     };
+    vm.$watch(function () {
+        return LoginService.userName;
+    }, function (newUserName) {
+        if (newUserName != 'DefaultUser') {
+            vm.userName = newUserName;
+            vm.loginStatus = true;
+        }
+    });
 
     vm.$on('$locationChangeSuccess', function () {
         if (vm.isHomeRoute()) {
@@ -60,6 +68,12 @@ function AppCtrl($scope, $location, LoginService) {
     vm.redirectToLogin = function () {
         console.log('going to login!');
         $location.path('/login');
+    };
+    vm.logout = function () {
+        console.log('logout');
+        vm.loginStatus = false;
+        vm.userName = '';
+        LoginService.removeToken();
     };
     // implement all other features after implemeting login
     console.log("Constructed");

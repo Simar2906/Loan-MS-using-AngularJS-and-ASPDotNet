@@ -4,6 +4,10 @@
         sessionStorage.setItem('token', token);
         this.updateUserData();
     }
+    this.removeToken = function () {
+        sessionStorage.removeItem('token');
+        this.userName = 'DefaultUser';
+    }
     this.getUserData = function () {
         var token = sessionStorage.getItem('token');
         if (token == null) {
@@ -17,8 +21,8 @@
     }
     this.updateUserData = function () {
         var token = sessionStorage.getItem('token');
-        console.log('Login Found in session');
         if (token != null) {
+            console.log('Login Found in session', token);
             var decoded = jwtHelper.decodeToken(token);
             this.userName = decoded.name;
         }
