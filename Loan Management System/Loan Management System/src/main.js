@@ -2,14 +2,20 @@
 app.controller('AppCtrl', AppCtrl);
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
-        .when('/',{
-            template:'<home></home>'
+        .when('/', {
+            template: '<home></home>'
         })
         .when('/login', {
             template: '<login></login>'
         })
         .when('/customer', {
-            template: '<customer></customer>'
+            template: '<customer ng-view="cust"></customer>'
+        })
+        .when('/customer/allLoans', {
+            template: '<all-loans></all-loans>'
+        })
+        .when('/customer/appliedLoans', {
+            template: '<applied-loans></applied-loans>'
         })
         .when('/manager', {
             template: '<manager></manager>'
@@ -72,8 +78,8 @@ function AppCtrl($scope, $location, LoginService) {
     vm.logout = function () {
         console.log('logout');
         vm.loginStatus = false;
-        vm.userName = '';
         LoginService.removeToken();
+        $location.path('/login');
     };
     // implement all other features after implemeting login
     console.log("Constructed");

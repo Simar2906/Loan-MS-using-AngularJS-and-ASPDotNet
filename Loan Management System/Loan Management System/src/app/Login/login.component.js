@@ -3,7 +3,7 @@
     controller: loginController
 });
 loginController.$inject = ['$scope', 'LoginService', '$location'];
-function loginController($scope, LoginService,$location) {
+function loginController($scope, LoginService, $location) {
     var vm = $scope;
     console.log('inside login');
     vm.loginData = { email: '', password: '' };
@@ -31,5 +31,5 @@ function loginController($scope, LoginService,$location) {
                 vm.loginData.password = '';
             });
     };
-    
-    }
+
+}
