@@ -1,12 +1,7 @@
 ﻿app.service('LoanService', ['$resource', 'jwtHelper', function ($resource, jwtHelper) {
-
-    this.getAllLoans = function () {
-
-    }
-    this.apiResource = $resource('/api/validation/ValidateUser', {}, {
-        validateUser: {
-            method: 'POST'
+    this.apiResource = $resource('/api/loan/getAllLoans', {}, {
+        getAllLoans: {
+            method: 'GET'
         }
     });
-    this.updateUserData();
 }]);

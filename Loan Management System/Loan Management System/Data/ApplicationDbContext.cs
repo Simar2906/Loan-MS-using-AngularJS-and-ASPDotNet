@@ -11,7 +11,7 @@ namespace Loan_Management_System.Data
         }
 
         public DbSet<User> Users { get; set; }
-
+        public DbSet<Loan> Loans { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()

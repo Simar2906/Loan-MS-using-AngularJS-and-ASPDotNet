@@ -1,1 +1,35 @@
-﻿<h1>Ohio</h1>
+﻿<link rel="stylesheet" href="all-loans.component.css" />
+<br />
+<a href="#/customer">back</a>
+<!--<div class="modal-form" *ngIf="loanFormStatus">
+    <app-apply-now></app-apply-now>
+</div>-->
+<br />
+<div ng-repeat="loan in allLoans">
+    <h2>{{loan.title.toUpperCase()}}</h2>
+    <!--<p>{{loan.logo}}</p>-->
+    <img style="width:100px" src="{{loan.logo}}" />
+    <table>
+        <tr>
+            <td>Loan Amount</td>
+            <td>{{loan.loanAmount}}</td>
+        </tr>
+        <tr>
+            <td>Interest Rates</td>
+            <td>{{loan.interestRates}}</td>
+        </tr>
+        <tr>
+            <td>Min. Credit Score</td>
+            <td>{{loan.minCreditScore}}</td>
+        </tr>
+        <tr>
+            <td>Min. Term Length</td>
+            <td>{{loan.termLength}}</td>
+        </tr>
+        <tr>
+            <td>Processing Fee</td>
+            <td>{{loan.processingFee}}</td>
+        </tr>
+    </table>
+    <hr />
+</div>
