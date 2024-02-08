@@ -2,6 +2,9 @@
     this.apiResource = $resource('/api/loan/getAllLoans', {}, {
         getAllLoans: {
             method: 'GET'
+        },
+        getLoansByUser: {
+            method: 'POST'
         }
     });
 }]);

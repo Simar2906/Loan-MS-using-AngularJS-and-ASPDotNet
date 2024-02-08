@@ -12,5 +12,6 @@
         public string Employer { get; set; }
         public string Designation { get; set; }
         public string UserPic { get; set; }
+        public ICollection<AppliedLoan> AppliedLoans { get; set; }
     }
 }

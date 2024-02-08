@@ -11,5 +11,7 @@
         public decimal TermLength { get; set; }
         public decimal ProcessingFee { get; set; }
 
+        public ICollection<AppliedLoan> AppliedLoans { get; set; }
+
     }
 }
