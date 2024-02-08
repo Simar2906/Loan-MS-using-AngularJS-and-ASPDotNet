@@ -23,10 +23,10 @@ namespace Loan_Management_System.Controllers
             return Ok(new {loans});
         }
         [HttpPost("getLoansByUser")]
-        public async Task<IActionResult> getLoansByUser(int UserId)
+        public async Task<IActionResult> getLoansByUser([FromBody] int userId)
         {
-            List<AppliedByUser> loanList = await _loanRepo.GetLoansByUser(UserId);
-
+            Console.WriteLine(userId);
+            List<AppliedByUser> loanList = await _loanRepo.GetLoansByUser(userId);
             return Ok(new { loanList });
         }
     }

@@ -1,1 +1,32 @@
-﻿<h1>Ohio</h1>
+﻿<br />
+<a href="#/customer">back</a>
+<br />
+<hr />
+<div ng-repeat="loan in appliedLoans">
+    <h2>{{loan.title.toUpperCase()}}</h2>
+    <!--<p>{{loan.logo}}</p>-->
+    <img style="width:100px" src="{{loan.logo}}" />
+    <table>
+        <tr>
+            <td>Applied Requested</td>
+            <td>{{loan.appliedAmount}}</td>
+        </tr>
+        <tr>
+            <td>Interest Rate Requested</td>
+            <td>{{loan.designatedRate}}</td>
+        </tr>
+        <tr>
+            <td>Processing Fee Paid</td>
+            <td>{{loan.ProcessingFee}}</td>
+        </tr>
+        <tr>
+            <td>Term Length Requested</td>
+            <td>{{createTime(loan.termLength).years}}Y,{{createTime(loan.termLength).months}}M,{{createTime(loan.termLength).days}}</td>
+        </tr>
+        <tr>
+            <td>Date Applied</td>
+            <td>{{loan.dateApplied|date:'dd-MM-yyyy'}}</td>
+        </tr>
+    </table>
+    <hr />
+</div>
