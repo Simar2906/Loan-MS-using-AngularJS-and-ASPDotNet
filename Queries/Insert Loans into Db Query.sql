@@ -27,3 +27,8 @@ VALUES
 (5, 10000, 12, 40, 1, '2024-01-12T12:42:18.993Z', 3),
 (5, 50000, 12, 20, 1, '2024-01-14T15:38:58.743Z', 3),
 (5, 10000, 10, 20.8, 3, '2024-01-14T15:43:03.580Z', 1);
+
+SELECT al."Id", u."Email", u."Gender", u."Name", u."Password", u."Role", u."UserPic", l."Logo", l."Title", 
+l."LoanAmount", l."InterestRates", al."AppliedAmount", al."AppliedRate", l."MinCreditScore", al."TermLength", 
+l."ProcessingFee",u."Employer", u."Salary", u."Designation", al."Status", al."DateApplied" FROM public."AppliedLoans" 
+al LEFT JOIN public."Users" u ON u."Id"=al."UserId" LEFT JOIN public."Loans" l ON l."Id"=al."LoanId" WHERE al."UserId"=1
