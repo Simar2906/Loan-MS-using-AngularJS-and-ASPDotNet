@@ -2,17 +2,18 @@
     templateUrl: 'app/Customer/Applied-Loans/applied-loans.component.html',
     controller: appliedLoansController
 });
-appliedLoansController.$inject = ['$scope', 'LoanService'];
-function appliedLoansController($scope, LoanService) {
+appliedLoansController.$inject = ['$scope', 'LoanService', 'LoginService'];
+function appliedLoansController($scope, LoanService, LoginService) {
     console.log('applied loans opened');
     var vm = $scope;
     vm.appliedLoans = [];
     vm.createTime = function (time) {
         return LoanService.yearsToYearsMonthsDays(time);
     }
-
-    
-    LoanService.apiResource.getLoansByUser({ userId: 1 }).$promise
+    vm.getLoanStatus = function (loan) {
+        return LoanService.getLoanStatus(loan);
+    }
+    LoanService.apiResource.getLoansByUser({ userId: LoginService.getUserData().id }).$promise
         .then(function (response) {
             vm.appliedLoans = response.loanList;
             console.log(vm.appliedLoans);

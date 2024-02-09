@@ -1,4 +1,5 @@
-﻿<br />
+﻿<link rel="stylesheet" href="app/Customer/Applied-Loans/applied-loans.component.css"/>
+<br />
 <a href="#/customer">back</a>
 <br />
 <hr />
@@ -13,20 +14,24 @@
         </tr>
         <tr>
             <td>Interest Rate Requested</td>
-            <td>{{loan.designatedRate}}</td>
+            <td>{{loan.appliedRate}}</td>
         </tr>
         <tr>
             <td>Processing Fee Paid</td>
-            <td>{{loan.ProcessingFee}}</td>
+            <td>{{loan.processingFee}}</td>
         </tr>
         <tr>
             <td>Term Length Requested</td>
-            <td>{{createTime(loan.termLength).years}}Y,{{createTime(loan.termLength).months}}M,{{createTime(loan.termLength).days}}</td>
+            <td>{{createTime(loan.termLength).years}}Y,{{createTime(loan.termLength).months}}M,{{createTime(loan.termLength).days}}D</td>
         </tr>
         <tr>
             <td>Date Applied</td>
             <td>{{loan.dateApplied|date:'dd-MM-yyyy'}}</td>
         </tr>
     </table>
+    <div ng-class="getLoanStatus(loan)">
+        <span stlye="color:white">Status:- {{getLoanStatus(loan)}}</span>
+
+    </div>
     <hr />
 </div>

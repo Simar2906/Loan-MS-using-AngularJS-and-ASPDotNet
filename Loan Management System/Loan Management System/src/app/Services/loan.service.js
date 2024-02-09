@@ -8,14 +8,30 @@
 
         return { years, months, days };
     }
+
+    this.getLoanStatus = function (loan) {
+        switch (loan.status) {
+            case 1:
+                return "Approved";
+                break;
+            case 2:
+                return "Rejected";
+                break;
+            case 3:
+                return "Pending";
+            default:
+                return null;
+        }
+    }
     this.apiResource = $resource('/api/loan', {}, {
         getAllLoans: {
             url: '/api/loan/getAllLoans',
             method: 'GET'
         },
         getLoansByUser: {
-            url: '/api/loan/getLoansByUser/:userId',
-            method: 'POST'
+            url: '/api/loan/getLoansByUser',
+            method: 'POST',
+            params: { userId: '@userId' }
         }
     });
 }]);

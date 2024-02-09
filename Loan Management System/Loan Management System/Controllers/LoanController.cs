@@ -23,7 +23,7 @@ namespace Loan_Management_System.Controllers
             return Ok(new {loans});
         }
         [HttpPost("getLoansByUser")]
-        public async Task<IActionResult> getLoansByUser([FromBody] int userId)
+        public async Task<IActionResult> getLoansByUser(int userId)
         {
             Console.WriteLine(userId);
             List<AppliedByUser> loanList = await _loanRepo.GetLoansByUser(userId);
