@@ -30,20 +30,9 @@ namespace Loan_Management_System.Repository.LoanData
         }
         public async Task<List<AppliedByUser>> GetAllApplications()
         {
-            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 
-                               u.""Password"", u.""Role"", u.""UserPic"", l.""Logo"", l.""Title"", 
-                               l.""LoanAmount"", l.""InterestRates"", al.""AppliedAmount"", al.""AppliedRate"", 
-                               l.""MinCreditScore"", al.""TermLength"", l.""ProcessingFee"", u.""Employer"", u.""Salary"", 
-                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"" 
-                        FROM public.""AppliedLoans"" al 
-                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId"" 
-                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId""";
-            return (await _db.QueryAsync<AppliedByUser>(sql)).AsList();
-        }
-        public async Task<List<AppliedByUser>> GetLoansByUser(int userId)
-        {
             return await _dbContextEF.AppliedLoans
-                .Where(al => al.UserId == userId)
+                .Include(al => al.User)
+                .Include(al => al.Loan)
                 .Select(al => new AppliedByUser
                 {
                     Id = al.Id,
@@ -69,7 +58,21 @@ namespace Loan_Management_System.Repository.LoanData
                     DateApplied = al.DateApplied,
                     LoanId = al.LoanId
                 })
-    .ToListAsync();
+                .ToListAsync();
+        }
+        public async Task<List<AppliedByUser>> GetLoansByUser(int userId)
+        {
+            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 
+                               u.""Password"", u.""Role"", u.""UserPic"", l.""Logo"", l.""Title"", 
+                               l.""LoanAmount"", l.""InterestRates"", al.""AppliedAmount"", al.""AppliedRate"", 
+                               l.""MinCreditScore"", al.""TermLength"", l.""ProcessingFee"", u.""Employer"", u.""Salary"", 
+                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"" 
+                        FROM public.""AppliedLoans"" al 
+                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId"" 
+                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId"" 
+                        WHERE al.""UserId"" = @UserId";
+
+            return (await _db.QueryAsync<AppliedByUser>(sql, new { UserId = userId })).AsList();
         }
 
         public void ApplyNewLoan(AppliedLoan newLoan)
