@@ -61,5 +61,18 @@ namespace Loan_Management_System.Controllers
             _loanRepo.ApplyNewLoan(newLoan);
             return Ok("Loan Applied Successfully!");
         }
+
+        [HttpPatch("approveLoan")]
+        public IActionResult approveLoan(int loanId)
+        {
+            _loanRepo.ApproveLoan(loanId);
+            return Ok("Loan Approved");
+        }
+        [HttpPatch("rejectLoan")]
+        public IActionResult rejectLoan(int loanId)
+        {
+            _loanRepo.RejectLoan(loanId);
+            return Ok("Loan Rejected");
+        }
     }
 }

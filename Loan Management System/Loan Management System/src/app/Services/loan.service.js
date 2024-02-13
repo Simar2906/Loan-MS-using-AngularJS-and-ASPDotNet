@@ -60,6 +60,16 @@
         getAllRejected: {
             url: '/api/loan/getAllRejected',
             method: 'GET'
+        },
+        approveLoan: {
+            url: '/api/loan/approveLoan',
+            method: 'PATCH',
+            params: { loanId: '@loanId' }
+        },
+        rejectLoan: {
+            url: '/api/loan/rejectLoan',
+            method: 'PATCH',
+            params: { loanId: '@loanId' }
         }
     });
 }]);

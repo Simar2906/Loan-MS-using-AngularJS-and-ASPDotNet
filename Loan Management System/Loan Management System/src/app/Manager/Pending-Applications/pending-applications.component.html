@@ -3,7 +3,7 @@
 <a href="#/manager">back</a>
 <br />
 <hr />
-<div ng-repeat="loan in rejcApps">
+<div ng-repeat="loan in pendApps">
     <h2>{{loan.title.toUpperCase()}}</h2>
     <img style="width:100px" src="{{loan.logo}}" />
     <img class="userImage" src="{{loan.userPic}}" alt="Photo of User">
@@ -47,6 +47,8 @@
             <td>{{loan.dateApplied}}</td>
         </tr>
     </table>
+    <button ng-click="approveLoan(loan.id)">Approve</button>
+    <button ng-click="rejectLoan(loan.id)">Reject</button>
     <div ng-class="getLoanStatus(loan)">
         <span stlye="color:white">Status:- {{getLoanStatus(loan)}}</span>
 

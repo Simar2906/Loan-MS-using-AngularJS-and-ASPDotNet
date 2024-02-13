@@ -133,5 +133,24 @@ namespace Loan_Management_System.Repository.LoanData
             });
             return;
         }
+
+        public void ApproveLoan(int loanId)
+        {
+            var sql = @"UPDATE public.""AppliedLoans"" SET ""Status"" = 2 WHERE ""Id"" = @loanId";
+            _db.Execute(sql, new
+            {
+                loanId = loanId
+            });
+        }
+        public void RejectLoan(int loanId)
+        {
+            var loan = _dbContextEF.AppliedLoans.FirstOrDefault(l => l.Id == loanId);
+
+            if(loan != null)
+            {
+                loan.Status = 3;
+                _dbContextEF.SaveChanges();
+            }
+        }
     }
 }

@@ -10,8 +10,9 @@ namespace Loan_Management_System.Repository.LoanData
         Task<List<AppliedByUser>> GetAllApproved();
         Task<List<AppliedByUser>> GetAllPending();
         Task<List<AppliedByUser>> GetAllRejected();
-
         Task<List<AppliedByUser>> GetLoansByUser(int userId);
         void ApplyNewLoan(AppliedLoan newLoan);
+        void ApproveLoan(int loanId);
+        void RejectLoan(int loanId);
     }
 }
