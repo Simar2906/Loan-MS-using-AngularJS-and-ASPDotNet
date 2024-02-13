@@ -60,6 +60,46 @@ namespace Loan_Management_System.Repository.LoanData
                 })
                 .ToListAsync();
         }
+        public async Task<List<AppliedByUser>> GetAllApproved()
+        {
+            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 
+                               u.""Password"", u.""Role"", u.""UserPic"", l.""Logo"", l.""Title"", 
+                               l.""LoanAmount"", l.""InterestRates"", al.""AppliedAmount"", al.""AppliedRate"", 
+                               l.""MinCreditScore"", al.""TermLength"", l.""ProcessingFee"", u.""Employer"", u.""Salary"", 
+                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"" 
+                        FROM public.""AppliedLoans"" al 
+                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId"" 
+                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId"" 
+                        WHERE al.""Status"" = 2";
+            return (await _db.QueryAsync<AppliedByUser>(sql)).AsList();
+        }
+        public async Task<List<AppliedByUser>> GetAllPending()
+        {
+            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 
+                               u.""Password"", u.""Role"", u.""UserPic"", l.""Logo"", l.""Title"", 
+                               l.""LoanAmount"", l.""InterestRates"", al.""AppliedAmount"", al.""AppliedRate"", 
+                               l.""MinCreditScore"", al.""TermLength"", l.""ProcessingFee"", u.""Employer"", u.""Salary"", 
+                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"" 
+                        FROM public.""AppliedLoans"" al 
+                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId"" 
+                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId"" 
+                        WHERE al.""Status"" = 1";
+            return (await _db.QueryAsync<AppliedByUser>(sql)).AsList();
+        }
+        public async Task<List<AppliedByUser>> GetAllRejected()
+        {
+            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 
+                               u.""Password"", u.""Role"", u.""UserPic"", l.""Logo"", l.""Title"", 
+                               l.""LoanAmount"", l.""InterestRates"", al.""AppliedAmount"", al.""AppliedRate"", 
+                               l.""MinCreditScore"", al.""TermLength"", l.""ProcessingFee"", u.""Employer"", u.""Salary"", 
+                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"" 
+                        FROM public.""AppliedLoans"" al 
+                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId"" 
+                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId"" 
+                        WHERE al.""Status"" = 3";
+            return (await _db.QueryAsync<AppliedByUser>(sql)).AsList();
+        }
+
         public async Task<List<AppliedByUser>> GetLoansByUser(int userId)
         {
             var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 

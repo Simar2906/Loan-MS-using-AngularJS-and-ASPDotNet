@@ -28,7 +28,24 @@ namespace Loan_Management_System.Controllers
             List<AppliedByUser> loans = await _loanRepo.GetAllApplications();
             return Ok(new { loans });
         }
-
+        [HttpGet("getAllApproved")]
+        public async Task<IActionResult> getAllApproved()
+        {
+            List<AppliedByUser> loans = await _loanRepo.GetAllApproved();
+            return Ok(new { loans });
+        }
+        [HttpGet("getAllPending")]
+        public async Task<IActionResult> getAllPending()
+        {
+            List<AppliedByUser> loans = await _loanRepo.GetAllPending();
+            return Ok(new { loans });
+        }
+        [HttpGet("getAllRejected")]
+        public async Task<IActionResult> getAllRejected()
+        {
+            List<AppliedByUser> loans = await _loanRepo.GetAllRejected();
+            return Ok(new { loans });
+        }
         [HttpPost("getLoansByUser")]
         public async Task<IActionResult> getLoansByUser(int userId)
         {

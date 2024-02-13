@@ -1,0 +1,55 @@
+﻿<link rel="stylesheet" href="app/Manager/Rejected-Applications/rejected-applications.component.css" />
+<br />
+<a href="#/manager">back</a>
+<br />
+<hr />
+<div ng-repeat="loan in rejcApps">
+    <h2>{{loan.title.toUpperCase()}}</h2>
+    <img style="width:100px" src="{{loan.logo}}" />
+    <img class="userImage" src="{{loan.userPic}}" alt="Photo of User">
+    <table>
+        <tr>
+            <td>Applicant:</td>
+            <td>{{loan.name}}</td>
+        </tr>
+        <tr>
+            <td>Gender:</td>
+            <td>{{loan.gender}}</td>
+        </tr>
+        <tr>
+            <td>Current Employer:</td>
+            <td>{{loan.employer}}</td>
+        </tr>
+        <tr>
+            <td>Salary:</td>
+            <td>{{loan.salary}}</td>
+        </tr>
+        <tr>
+            <td>Designation:</td>
+            <td>{{loan.designation}}</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>Applied Amount</td>
+            <td>{{loan.appliedAmount}}</td>
+        </tr>
+        <tr>
+            <td>Interest Rate</td>
+            <td>{{loan.appliedRate}}%</td>
+        </tr>
+        <tr>
+            <td>Term Length</td>
+            <td>{{loan.termLength}}</td>
+        </tr>
+        <tr>
+            <td>Applied Date</td>
+            <td>{{loan.dateApplied}}</td>
+        </tr>
+    </table>
+    <div ng-class="getLoanStatus(loan)">
+        <span stlye="color:white">Status:- {{getLoanStatus(loan)}}</span>
+
+    </div>
+    <hr />
+</div>

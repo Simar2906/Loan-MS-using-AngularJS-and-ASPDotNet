@@ -13,13 +13,13 @@
     this.getLoanStatus = function (loan) {
         switch (loan.status) {
             case 1:
-                return "Approved";
+                return "Pending";
                 break;
             case 2:
-                return "Rejected";
+                return "Approved";
                 break;
             case 3:
-                return "Pending";
+                return "Rejected";
             default:
                 return null;
         }
@@ -48,6 +48,18 @@
         applyNewLoan: {
             url: '/api/loan/applyNewLoan',
             method: 'POST'
+        },
+        getAllApproved: {
+            url: '/api/loan/getAllApproved',
+            method: 'GET'
+        },
+        getAllPending: {
+            url: '/api/loan/getAllPending',
+            method: 'GET'
+        },
+        getAllRejected: {
+            url: '/api/loan/getAllRejected',
+            method: 'GET'
         }
     });
 }]);
