@@ -43,7 +43,7 @@
             <a class="logButtons" ng-click="deleteUser()"ng-if="loginStatus">Delete your account!</a>
 
         </div>
-        <div ng-cloak>
+        <div ng-cloak style="display:flex">
             <div class="welcomeMessage" ng-if="loginStatus">Welcome {{userName}}!</div>
             <div ng-if="!loginStatus" style="display:flex">
                 <a class="logButtons" ng-click="redirectToLogin()">Login</a>
