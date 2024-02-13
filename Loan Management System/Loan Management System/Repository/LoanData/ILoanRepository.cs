@@ -14,5 +14,6 @@ namespace Loan_Management_System.Repository.LoanData
         void ApplyNewLoan(AppliedLoan newLoan);
         void ApproveLoan(int loanId);
         void RejectLoan(int loanId);
+        void DeleteLoan(int loanId);
     }
 }

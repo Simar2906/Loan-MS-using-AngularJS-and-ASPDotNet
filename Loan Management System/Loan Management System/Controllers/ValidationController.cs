@@ -20,6 +20,20 @@ namespace Loan_Management_System.Controllers
         {
             _userRepo = userRepo;
         }
+        [HttpPost("CreateUser")]
+        public async Task<IActionResult> CreateUser([FromBody] User userData)
+        {
+            try
+            {
+                User user = await _userRepo.CreateUser(userData);
+                var token = GenerateToken(user);
+                return Ok(new { Token = token });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
+        }
         [HttpPost("ValidateUser")]
         public async Task<IActionResult> ValidateUser([FromBody] LoginFormData credentials)
         {
@@ -41,6 +55,13 @@ namespace Loan_Management_System.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
         }
+        [HttpDelete("DeleteUser")]
+        public async Task<IActionResult> DeleteUser(int userId)
+        {
+            await _userRepo.DeleteUser(userId);
+            return Ok("user deleted");
+        }
+
         private string GenerateToken(User userDetails)
         {
             var claims = new List<Claim>

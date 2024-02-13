@@ -46,7 +46,7 @@ namespace Loan_Management_System.Controllers
             List<AppliedByUser> loans = await _loanRepo.GetAllRejected();
             return Ok(new { loans });
         }
-        [HttpPost("getLoansByUser")]
+        [HttpGet("getLoansByUser")]
         public async Task<IActionResult> getLoansByUser(int userId)
         {
             Console.WriteLine(userId);
@@ -73,6 +73,12 @@ namespace Loan_Management_System.Controllers
         {
             _loanRepo.RejectLoan(loanId);
             return Ok("Loan Rejected");
+        }
+        [HttpDelete("deleteLoan")]
+        public IActionResult deleteLoan(int loanId)
+        {
+            _loanRepo.DeleteLoan(loanId);
+            return Ok("Loan Deleted");
         }
     }
 }

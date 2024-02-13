@@ -42,7 +42,7 @@
         },
         getLoansByUser: {
             url: '/api/loan/getLoansByUser',
-            method: 'POST',
+            method: 'GET',
             params: { userId: '@userId' }
         },
         applyNewLoan: {
@@ -69,6 +69,11 @@
         rejectLoan: {
             url: '/api/loan/rejectLoan',
             method: 'PATCH',
+            params: { loanId: '@loanId' }
+        },
+        deleteLoan: {
+            url: '/api/loan/deleteLoan',
+            method: 'DELETE',
             params: { loanId: '@loanId' }
         }
     });

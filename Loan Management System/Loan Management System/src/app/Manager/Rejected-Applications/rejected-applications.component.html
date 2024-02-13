@@ -47,6 +47,7 @@
             <td>{{loan.dateApplied}}</td>
         </tr>
     </table>
+    <button ng-click="deleteLoan(loan.id)">Delete!</button>
     <div ng-class="getLoanStatus(loan)">
         <span stlye="color:white">Status:- {{getLoanStatus(loan)}}</span>
 

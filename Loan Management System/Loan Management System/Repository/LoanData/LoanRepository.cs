@@ -152,5 +152,11 @@ namespace Loan_Management_System.Repository.LoanData
                 _dbContextEF.SaveChanges();
             }
         }
+        public void DeleteLoan(int loanId)
+        {
+            var sql = @"DELETE FROM public.""AppliedLoans"" WHERE ""Id"" = @loanId";
+
+            _db.Execute(sql, new { loanId });
+        }
     }
 }

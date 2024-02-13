@@ -18,4 +18,14 @@ function rejectedApplicationsController($scope, LoanService) {
     vm.getLoanStatus = function (loan) {
         return LoanService.getLoanStatus(loan);
     }
+    vm.deleteLoan = function (loanId) {
+        LoanService.apiResource.deleteLoan({ loanId: loanId }).$promise
+            .then(function (response) {
+                vm.rejcApps = vm.rejcApps.filter(v => v.id != loanId);
+                console.log('Deleted Successfully');
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 }

@@ -8,6 +8,9 @@ app.config(function ($routeProvider, $locationProvider) {
         .when('/login', {
             template: '<login></login>'
         })
+        .when('/signup',{
+            template: '<signup></signup>'
+        })
         .when('/customer', {
             template: '<customer></customer>'
         })
@@ -87,12 +90,36 @@ function AppCtrl($scope, $location, LoginService) {
         console.log('going to login!');
         $location.path('/login');
     };
+    vm.redirectToSignup = function () {
+        console.log('going to signup!');
+        $location.path('/signup');
+    }
     vm.logout = function () {
         console.log('logout');
         vm.loginStatus = false;
         LoginService.removeToken();
         $location.path('/login');
     };
+
+    vm.deleteUser = function () {
+        var confirmation = confirm('Are you sure');
+        console.log(LoginService.getUserData().id);
+        if (confirmation) {
+            LoginService.apiResource.deleteUser({ userId: LoginService.getUserData().id }).$promise
+                .then(function (response) {
+                    vm.logout();
+                    $location.path('/');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert('User Not found!');
+                });
+        }
+        else {
+            // User clicked "Cancel"
+            console.log('User clicked Cancel');
+        }
+    }
     // implement all other features after implemeting login
     console.log("Constructed");
 }

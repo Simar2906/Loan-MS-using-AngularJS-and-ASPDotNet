@@ -1,0 +1,57 @@
+﻿<link rel="stylesheet" href="app/Signup/signup.component.css" />
+
+<div class="custContainer">
+    <div class="actualForm">
+        <div class="typeText">Please Enter Your Details:-</div>
+        <div class="formCard">
+            <div class="typeText formTitle">Signup</div>
+            <form novalidate class="subTypeText formContents" name="signupForm">
+                <div>
+                    <label class="formLabel" for="email">Email</label><br>
+                    <input type="text" name="email" id="email" ng-model="userData.Email">
+                </div>
+                <div>
+                    <label class="formLabel" for="gender">Gender</label><br>
+                    <input type="radio" name="gender" id="male" ng-model="userData.Gender" value="male" ng-checked="true" ng-init="userData.Gender = 'male'">
+                    <label class="radioLabel" for="male">Male</label>
+                    <input type="radio" name="gender" id="female" ng-model="userData.Gender" value="female">
+                    <label class="radioLabel" for="female">Female</label>
+                </div>
+                <div>
+                    <label class="formLabel" for="name">Name</label><br>
+                    <input type="text" name="name" id="name" ng-model="userData.Name">
+                </div>
+                <div>
+                    <label class="formLabel" for="password">Password</label><br>
+                    <input type="password" name="password" id="password" ng-model="userData.Password">
+                </div>
+                <div>
+                    <label class="formLabel" for="role">Role</label><br>
+                    <input type="radio" name="role" id="customer" ng-model="userData.Role" value="CUSTOMER" ng-checked="true" ng-init="userData.Role = 'CUSTOMER'">
+                    <label class="radioLabel" for="customer">Customer</label>
+                    <input type="radio" name="role" id="manager" ng-model="userData.Role" value="MANAGER">
+                    <label class="radioLabel" for="manager">Manager</label>
+                </div>
+                <div ng-show="userData.Role !== 'MANAGER'">
+                    <div>
+                        <label class="formLabel" for="salary">Salary</label><br>
+                        <input type="number" name="salary" id="salary" ng-model="userData.Salary">
+                    </div>
+                    <div>
+                        <label class="formLabel" for="employer">Employer</label><br>
+                        <input type="text" name="employer" id="employer" ng-model="userData.Employer">
+                    </div>
+                    <div>
+                        <label class="formLabel" for="designation">Designation</label><br>
+                        <input type="text" name="designation" id="designation" ng-model="userData.Designation">
+                    </div>
+                </div>
+                <div>
+                    <label class="formLabel" for="userPic">User Picture(link)</label><br>
+                    <input type="text" name="userPic" id="userPic" ng-model="userData.UserPic">
+                </div>
+                <input type="submit" name="" id="" value="Signup" ng-click="signupProcedure()">
+            </form>
+        </div>
+    </div>
+</div>

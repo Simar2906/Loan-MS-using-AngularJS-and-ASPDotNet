@@ -25,10 +25,8 @@
     <script src="app/Manager/Approved-Applications/approved-applications.component.js"></script>
     <script src="app/Manager/Pending-Applications/pending-applications.component.js"></script>
     <script src="app/Manager/Rejected-Applications/rejected-applications.component.js"></script>
-
-
     <script src="app/Home/home.component.js"></script>
-
+    <script src="app/Signup/signup.component.js"></script>
 
 </head>
 
@@ -40,12 +38,19 @@
         <div>A sub Division of Simar Industries</div>
     </div>
     <div class="actionsPanel">
-        <div>
-            <a class="logButtons" ng-if="showDashboardLink && isHomeRoute()">Go to your Dashboard</a>
+        <div style="display:flex">
+            <a class="logButtons" ng-if="showDashboardLink && isHomeRoute()">Go to your Dashboard</a>&nbsp;
+            <a class="logButtons" ng-click="deleteUser()"ng-if="loginStatus">Delete your account!</a>
+
         </div>
         <div ng-cloak>
             <div class="welcomeMessage" ng-if="loginStatus">Welcome {{userName}}!</div>
-            <a class="logButtons" ng-if="!loginStatus" ng-click="redirectToLogin()">Login</a>
+            <div ng-if="!loginStatus" style="display:flex">
+                <a class="logButtons" ng-click="redirectToLogin()">Login</a>
+                &nbsp;
+                <a class="logButtons" ng-click="redirectToSignup()">Signup</a>
+            </div>
+            
             <a class="logButtons" ng-if="loginStatus" ng-click="logout()">Logout</a>
         </div>
     </div>

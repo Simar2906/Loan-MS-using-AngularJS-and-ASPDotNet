@@ -30,7 +30,17 @@
 
     this.apiResource = $resource('/api/validation/ValidateUser', {}, {
         validateUser: {
+            url: '/api/validation/ValidateUser',
             method: 'POST'
+        },
+        createUser: {
+            url: '/api/validation/CreateUser',
+            method: 'POST'
+        },
+        deleteUser: {
+            url: '/api/validation/DeleteUser',
+            method: 'DELETE',
+            params: { userId: '@userId' }
         }
     });
     this.updateUserData();
