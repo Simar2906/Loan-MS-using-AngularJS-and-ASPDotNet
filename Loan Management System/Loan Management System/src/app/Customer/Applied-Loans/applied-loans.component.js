@@ -21,5 +21,4 @@ function appliedLoansController($scope, LoanService, LoginService) {
         .catch(function (error) {
             console.log(error);
         });
-
 }

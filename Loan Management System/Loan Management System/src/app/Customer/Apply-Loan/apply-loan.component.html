@@ -1,0 +1,101 @@
+﻿<link rel="stylesheet" href="app/Customer/Apply-Loan/apply-loan.component.css" />
+<div class="overlay"></div>
+<div class="modal-form">
+    <form name="applyForm" novalidate>
+        <img ng-src="{{applyingLoan.logo}}" id="loan-image" alt="">
+        <p>{{applyingLoan.title.toUpperCase()}}</p>
+        <table>
+            <tr>
+                <td>
+                    hallelujag
+                    <label for="Name">Applicant Name:</label>
+                </td>
+                <td>
+                    <input type="text" ng-readonly="true" id="Name" ng-model="userData.name">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Gender">Gender:</label>
+                </td>
+                <td>
+                    <input type="text" ng-readonly="true" id="Gender" ng-model="userData.gender">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Employer">Employer:</label>
+                </td>
+                <td>
+                    <input type="text" ng-readonly="true" id="Employer" ng-model="userData.employer">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Salary">Salary($pa):</label>
+                </td>
+                <td>
+                    <input type="number" ng-readonly="true" id="Salary" ng-model="userData.salary">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Designation">Designation:</label>
+                </td>
+                <td>
+                    <input type="text" ng-readonly="true" id="Designation" ng-model="userData.designation">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="amountApplied">Apply Loan for Amount($)*:</label>
+                </td>
+                <td>
+                    <input type="number" id="amountApplied" name="amountApplied" ng-model="amountApplied" ng-required="true">
+                    <div ng-show="formSubmitted">
+                        <div ng-show="applyForm.amountApplied.$error.required">
+                            <span style="color: red;">Amount is required!</span>
+                        </div>
+                        <div ng-show="applyForm.amountApplied.$error.invalidRange">
+                            <span style="color: red;">Amount must be between {{loanRange[0]}} and {{loanRange[1]}}!</span>
+                        </div>
+                    </div>
+                </td>   
+            </tr>
+            <tr>
+                <td>
+                    <label for="interestRate">Interest Rate(%)*:</label>
+                </td>
+                <td>
+                    <input type="number" id="interestRate" ng-model="interestRate" ng-required="true" name="interestRate">
+                    <div ng-show="formSubmitted">
+                        <div ng-show="applyForm.interestRate.$error.required">
+                            <span style="color: red;">Interest Rate is required!</span>
+                        </div>
+                        <div ng-show="applyForm.interestRate.$error.invalidRange">
+                            <span style="color: red;">Interest Rate must be between {{range[0]}} and {{range[1]}}!</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="termLength">Term Length(yr)*:</label>
+                </td>
+                <td>
+                    <input type="number" id="termLength" name="termLength" ng-model="termLength" ng-required="true">
+                    <div ng-show="formSubmitted">
+                        <div ng-show="applyForm.termLength.$error.required">
+                            <span style="color: red;">Term Length is required!</span>
+                        </div>
+                        <div ng-show="applyForm.termLength.$error.invalidRange">
+                            <span style="color: red;">Term Length must be between {{applyingLoan.termLength}} and 40!</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" ng-click="applyLoan()">Apply</button>&nbsp;
+        <button type="button" ng-click="cancelApply()">Cancel</button>
+    </form>
+</div>

@@ -1,5 +1,6 @@
 ﻿app.service('LoanService', ['$resource', 'jwtHelper', function ($resource, jwtHelper) {
-
+    this.applyingLoan = {};
+    this.popUpFormStatus = false;
     this.yearsToYearsMonthsDays = function (totalYears) {
         const years = Math.floor(totalYears);
         const decimalMonths = (totalYears - years) * 12;
@@ -22,6 +23,13 @@
             default:
                 return null;
         }
+    }
+
+    this.applyNewLoanClicked = function(loanDetails) {
+        console.log("Loan Applied");
+
+        this.currentApplyingLoan = loanDetails;
+        this.popUpFormStatus = true;
     }
     this.apiResource = $resource('/api/loan', {}, {
         getAllLoans: {

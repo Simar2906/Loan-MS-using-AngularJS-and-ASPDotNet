@@ -6,6 +6,19 @@ allLoansController.$inject = ['$scope', 'LoanService'];
 function allLoansController($scope, LoanService) {
     var vm = $scope;
     vm.allLoans = [];
+    vm.loanFormStatus = LoanService.popUpFormStatus;
+
+    vm.$watch(
+        function () {
+            return LoanService.popUpFormStatus;
+        },
+        function (newValue, oldValue) {
+            vm.loanFormStatus = newValue;
+        },
+        true // Add this parameter for a deep watch
+    );
+
+
     LoanService.apiResource.getAllLoans().$promise
         .then(function (response) {
             vm.allLoans = response.loans;
@@ -14,4 +27,7 @@ function allLoansController($scope, LoanService) {
         .catch(function (error) {
             console.log(error);
         });
+    vm.applyNowClicked = function(loanDetails){
+        LoanService.applyNewLoanClicked(loanDetails);
+    }
 }

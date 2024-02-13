@@ -1,8 +1,8 @@
 ﻿<br />
 <a href="#/customer">back</a>
-<!--<div class="modal-form" *ngIf="loanFormStatus">
-    <app-apply-now></app-apply-now>
-</div>-->
+<div class="modal-form" ng-show="loanFormStatus">
+    <apply-loan></apply-loan>
+</div>
 <br />
 <hr />
 <div ng-repeat="loan in allLoans">
@@ -31,5 +31,6 @@
             <td>{{loan.processingFee}}</td>
         </tr>
     </table>
+    <button ng-click="applyNowClicked(loan)">Apply Now</button>
     <hr />
 </div>
