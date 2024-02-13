@@ -6,6 +6,7 @@ namespace Loan_Management_System.Repository.LoanData
     public interface ILoanRepository
     {
         Task<List<Loan>> GetAllLoans();
+        Task<List<AppliedByUser>> GetAllApplications();
         Task<List<AppliedByUser>> GetLoansByUser(int userId);
         void ApplyNewLoan(AppliedLoan newLoan);
     }

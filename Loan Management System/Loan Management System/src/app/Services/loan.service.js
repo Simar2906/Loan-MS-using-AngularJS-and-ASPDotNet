@@ -36,6 +36,10 @@
             url: '/api/loan/getAllLoans',
             method: 'GET'
         },
+        getAllApplications: {
+            url: '/api/loan/getAllApplications',
+            method: 'GET'
+        },
         getLoansByUser: {
             url: '/api/loan/getLoansByUser',
             method: 'POST',

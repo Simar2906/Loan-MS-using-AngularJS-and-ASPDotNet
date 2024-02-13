@@ -20,6 +20,18 @@ app.config(function ($routeProvider, $locationProvider) {
         .when('/manager', {
             template: '<manager></manager>'
         })
+        .when('/manager/allApps', {
+            template: '<manager></manager><all-applications></all-applications>'
+        })
+        .when('/manager/apprApps', {
+            template: '<manager></manager><approved-applications></approved-applications>'
+        })
+        .when('/manager/pendApps', {
+            template: '<manager></manager><pending-applications></pending-applications>'
+        })
+        .when('/manager/rejcApps', {
+            template: '<manager></manager><rejected-applications></rejected-applications>'
+        })
         .otherwise({
             redirectTo: ''
         });

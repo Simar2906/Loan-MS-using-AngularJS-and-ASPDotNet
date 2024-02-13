@@ -22,6 +22,13 @@ namespace Loan_Management_System.Controllers
             List<Loan> loans = await _loanRepo.GetAllLoans();
             return Ok(new {loans});
         }
+        [HttpGet("getAllApplications")]
+        public async Task<IActionResult> getAllApplications()
+        {
+            List<AppliedByUser> loans = await _loanRepo.GetAllApplications();
+            return Ok(new { loans });
+        }
+
         [HttpPost("getLoansByUser")]
         public async Task<IActionResult> getLoansByUser(int userId)
         {
@@ -35,7 +42,7 @@ namespace Loan_Management_System.Controllers
             newLoan.Status = 1;
             newLoan.DateApplied = DateTime.Now;
             _loanRepo.ApplyNewLoan(newLoan);
-            return Ok(newLoan);
+            return Ok("Loan Applied Successfully!");
         }
     }
 }

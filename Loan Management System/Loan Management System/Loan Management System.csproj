@@ -16,7 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="src\app\Manager\" />
+    <Folder Include="src\app\Manager\Approved-Applications\" />
+    <Folder Include="src\app\Manager\Pending-Applications\" />
+    <Folder Include="src\app\Manager\Rejected-Applications\" />
     <Folder Include="src\assets\" />
   </ItemGroup>
 

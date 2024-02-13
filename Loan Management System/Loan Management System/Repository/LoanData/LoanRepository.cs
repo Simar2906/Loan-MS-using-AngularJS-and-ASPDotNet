@@ -28,7 +28,18 @@ namespace Loan_Management_System.Repository.LoanData
         {
             return await _dbContextEF.Loans.ToListAsync();
         }
-
+        public async Task<List<AppliedByUser>> GetAllApplications()
+        {
+            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 
+                               u.""Password"", u.""Role"", u.""UserPic"", l.""Logo"", l.""Title"", 
+                               l.""LoanAmount"", l.""InterestRates"", al.""AppliedAmount"", al.""AppliedRate"", 
+                               l.""MinCreditScore"", al.""TermLength"", l.""ProcessingFee"", u.""Employer"", u.""Salary"", 
+                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"" 
+                        FROM public.""AppliedLoans"" al 
+                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId"" 
+                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId""";
+            return (await _db.QueryAsync<AppliedByUser>(sql)).AsList();
+        }
         public async Task<List<AppliedByUser>> GetLoansByUser(int userId)
         {
             var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 
