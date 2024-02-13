@@ -14,7 +14,7 @@
         public string LoanAmount { get; set; }
         public string InterestRates { get; set; }
         public int AppliedAmount { get; set; }
-        public int AppliedRate { get; set; }
+        public float AppliedRate { get; set; }
         public int MinCreditScore { get; set; }
         public int TermLength { get; set; }
         public decimal ProcessingFee { get; set; }
