@@ -38,19 +38,26 @@ function applyLoanController($scope, LoanService, LoginService) {
 
         if (vm.applyForm.$valid) {
             // Perform submission logic
-            console.log('Submitted Data:', {
-                userId: parseInt(vm.userData.id),
-                loanId: vm.applyingLoan.id,
-                amountApplied: vm.amountApplied,
-                interestRate: vm.interestRate,
-                termLength: vm.termLength,
-                // Add other form fields as needed
-            });
+            var submitted_data = {
+                UserId: parseInt(vm.userData.id),
+                LoanId: vm.applyingLoan.id,
+                AppliedAmount: vm.amountApplied,
+                AppliedRate: vm.interestRate,
+                TermLength: vm.termLength,
+            };
             console.log('Form is valid. Submitting...');
-            LoanService.popUpFormStatus = false;
-            clearForm(vm);
-            vm.formSubmitted = true;
 
+            LoanService.apiResource.applyNewLoan(submitted_data).$promise
+                .then(function (response) {
+                    console.log(response);
+                    LoanService.popUpFormStatus = false;
+                    clearForm(vm);
+                    vm.formSubmitted = false;
+                })
+                .catch(function (error) {
+                    console.log(error);
+
+                });
         } else {
             console.log('Form is invalid. Please check for errors.');
         }

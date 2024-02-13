@@ -29,5 +29,13 @@ namespace Loan_Management_System.Controllers
             List<AppliedByUser> loanList = await _loanRepo.GetLoansByUser(userId);
             return Ok(new { loanList });
         }
+        [HttpPost("applyNewLoan")]
+        public IActionResult applyNewLoan([FromBody] AppliedLoan newLoan)
+        {
+            newLoan.Status = 1;
+            newLoan.DateApplied = DateTime.Now;
+            _loanRepo.ApplyNewLoan(newLoan);
+            return Ok(newLoan);
+        }
     }
 }

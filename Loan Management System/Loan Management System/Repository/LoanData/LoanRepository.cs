@@ -43,5 +43,24 @@ namespace Loan_Management_System.Repository.LoanData
 
             return (await _db.QueryAsync<AppliedByUser>(sql, new { UserId = userId })).AsList();
         }
+
+        public void ApplyNewLoan(AppliedLoan newLoan)
+        {
+            var sql = @"INSERT INTO public.""AppliedLoans""(""UserId"", ""AppliedAmount"",
+								  ""AppliedRate"", ""TermLength"", ""Status"", ""DateApplied"", ""LoanId"")
+			VALUES(@UserId, @AppliedAmount, @AppliedRate, @TermLength, @Status, @DateApplied, @LoanId);";
+
+            _db.Execute(sql, new
+            {
+                UserId = newLoan.UserId,
+                AppliedAmount = newLoan.AppliedAmount,
+                AppliedRate = newLoan.AppliedRate,
+                TermLength = newLoan.TermLength,
+                Status = newLoan.Status,
+                DateApplied = newLoan.DateApplied,
+                LoanId = newLoan.LoanId
+            });
+            return;
+        }
     }
 }

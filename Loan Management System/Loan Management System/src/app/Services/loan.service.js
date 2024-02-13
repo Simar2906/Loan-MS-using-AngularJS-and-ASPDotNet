@@ -40,6 +40,10 @@
             url: '/api/loan/getLoansByUser',
             method: 'POST',
             params: { userId: '@userId' }
+        },
+        applyNewLoan: {
+            url: '/api/loan/applyNewLoan',
+            method: 'POST'
         }
     });
 }]);

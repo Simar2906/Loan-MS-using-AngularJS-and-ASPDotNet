@@ -7,5 +7,6 @@ namespace Loan_Management_System.Repository.LoanData
     {
         Task<List<Loan>> GetAllLoans();
         Task<List<AppliedByUser>> GetLoansByUser(int userId);
+        void ApplyNewLoan(AppliedLoan newLoan);
     }
 }
