@@ -100,7 +100,15 @@ function AppCtrl($scope, $location, LoginService) {
         LoginService.removeToken();
         $location.path('/login');
     };
-
+    vm.goToDash = function () {
+        var userData = LoginService.getUserData();
+        if (userData === null) {
+            return;
+        }
+        else {
+            $location.path(`/${userData.role.toLowerCase()}`)
+        }
+    }
     vm.deleteUser = function () {
         var confirmation = confirm('Are you sure');
         console.log(LoginService.getUserData().id);
@@ -120,6 +128,5 @@ function AppCtrl($scope, $location, LoginService) {
             console.log('User clicked Cancel');
         }
     }
-    // implement all other features after implemeting login
     console.log("Constructed");
 }

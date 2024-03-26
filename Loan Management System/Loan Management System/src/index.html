@@ -39,8 +39,8 @@
     </div>
     <div class="actionsPanel">
         <div style="display:flex">
-            <a class="logButtons" ng-if="showDashboardLink && isHomeRoute()">Go to your Dashboard</a>&nbsp;
-            <a class="logButtons" ng-click="deleteUser()"ng-if="loginStatus">Delete your account!</a>
+            <a class="logButtons" ng-click="goToDash()" ng-if="showDashboardLink && isHomeRoute()">Go to your Dashboard</a>&nbsp;
+            <a class="logButtons" ng-click="deleteUser()" ng-if="loginStatus">Delete your account!</a>
 
         </div>
         <div ng-cloak style="display:flex">
