@@ -27,7 +27,7 @@ function loginController($scope, LoginService, $location) {
             })
             .catch(function (error) {
                 console.log(error);
-                alert('User Not found!');
+                alert('Login Credentials are Incorrect!');
                 vm.loginData.password = '';
             });
     };
