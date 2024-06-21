@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Loan Management System", "Loan Management System\Loan Management System.csproj", "{240DC8CB-9B12-4BB7-A9DE-2B33598B9A56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Password Hasher", "Password Hasher\Password Hasher.csproj", "{DB5287B2-3BCB-4DDB-A87D-0D71113ADD61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Password Hasher", "Password Hasher\Password Hasher.csproj", "{DB5287B2-3BCB-4DDB-A87D-0D71113ADD61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image Downloader", "Image Downloader\Image Downloader.csproj", "{05D4E197-837D-4C42-8A59-9534CB0EB567}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DB5287B2-3BCB-4DDB-A87D-0D71113ADD61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB5287B2-3BCB-4DDB-A87D-0D71113ADD61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB5287B2-3BCB-4DDB-A87D-0D71113ADD61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05D4E197-837D-4C42-8A59-9534CB0EB567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05D4E197-837D-4C42-8A59-9534CB0EB567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05D4E197-837D-4C42-8A59-9534CB0EB567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05D4E197-837D-4C42-8A59-9534CB0EB567}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

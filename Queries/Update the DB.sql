@@ -1,7 +1,6 @@
 CREATE TABLE Files (
     Id SERIAL PRIMARY KEY,
-    FileKey VARCHAR(255) NOT NULL,
-    UserId INT NULL
+    FilePath VARCHAR(255) NOT NULL
 );
 
 ALTER TABLE "Users"
@@ -105,6 +104,7 @@ SET "Role" = CASE
                  WHEN "Gender" = 'female' THEN 'female'::gender_enum
              END;
 
+-- RUN Password Hasher in the solution
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 ALTER TABLE "Users"
@@ -113,7 +113,21 @@ ADD COLUMN "Salt" VARCHAR(60);
 ALTER TABLE "Users"
 ALTER COLUMN "Password" TYPE VARCHAR(128) USING "Password";
 
---change all text to varchar fixed
---see what to do with images
---add all local paths of image to file table and add references
+ALTER TABLE "Users"
+ALTER COLUMN "Email" TYPE VARCHAR(255) USING "Email";
+
+ALTER TABLE "Users"
+ALTER COLUMN "Employer" TYPE VARCHAR(40) USING "Employer";
+
+ALTER TABLE "Users"
+ALTER COLUMN "Designation" TYPE VARCHAR(40) USING "Designation";
+
+-- Run image downloader in the solution
+
+ALTER TABLE "Loans"
+DROP COLUMN "Logo";
+
+ALTER TABLE "Users"
+DROP COLUMN "UserPic";
+--update logic to file upload
 
