@@ -38,14 +38,17 @@ namespace Loan_Management_System.Repository.LoanData
                     Id = al.Id,
                     Email = al.User.Email,
                     Gender = al.User.Gender,
-                    Name = al.User.Name,
+                    FirstName = al.User.FirstName,
+                    LastName = al.User.LastName,
                     Password = al.User.Password,
                     Role = al.User.Role,
-                    UserPic = al.User.UserPic,
-                    Logo = al.Loan.Logo,
+                    UserPicturePath = al.User.ProfilePicture.FilePath,
+                    LoanLogoPath = al.Loan.LogoPicture.FilePath,
                     Title = al.Loan.Title,
-                    LoanAmount = al.Loan.LoanAmount,
-                    InterestRates = al.Loan.InterestRates,
+                    MinLoanAmount = al.Loan.MinLoanAmount,
+                    MaxLoanAmount = al.Loan.MaxLoanAmount,
+                    MinInterestRate = al.Loan.MinInterestRate,
+                    MaxInterestRate = al.Loan.MaxInterestRate,
                     AppliedAmount = al.AppliedAmount,
                     AppliedRate = al.AppliedRate,
                     MinCreditScore = al.Loan.MinCreditScore,
@@ -148,7 +151,7 @@ namespace Loan_Management_System.Repository.LoanData
 
             if(loan != null)
             {
-                loan.Status = 3;
+                loan.Status = Status.rejected;
                 _dbContextEF.SaveChanges();
             }
         }

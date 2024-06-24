@@ -1,15 +1,37 @@
-﻿namespace Loan_Management_System.DTOs
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Loan_Management_System.DTOs
 {
     public class Loan
     {
         public int Id { get; set; }
-        public string Logo { get; set; }
+
+        [Column(TypeName = "character varying(40)")]
         public string Title { get; set; }
-        public string LoanAmount { get; set; }
-        public string InterestRates { get; set; }
+
         public int MinCreditScore { get; set; }
+
+        [Column(TypeName = "numeric")]
         public decimal TermLength { get; set; }
+
+        [Column(TypeName = "numeric(18,2)")]
         public decimal ProcessingFee { get; set; }
+
+        public int LogoPictureId { get; set; }
+        
+        [ForeignKey(nameof(LogoPictureId))]
+        public File LogoPicture { get; set; }
+        [Column(TypeName = "numeric(18,2)")]
+        public decimal MinLoanAmount { get; set; }
+        
+        [Column(TypeName = "numeric(18,2)")]
+        public decimal MaxLoanAmount { get; set; }
+
+        [Column(TypeName = "numeric(5,2)")]
+        public decimal MinInterestRate { get; set; }
+        
+        [Column(TypeName = "numeric(5,2)")]
+        public decimal MaxInterestRate { get; set; }
 
         public ICollection<AppliedLoan> AppliedLoans { get; set; }
 

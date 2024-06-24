@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Loan_Management_System.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240208102242_Loans")]
-    partial class Loans
+    [Migration("20240624104118_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,11 +33,11 @@ namespace Loan_Management_System.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AppliedAmount")
-                        .HasColumnType("integer");
+                    b.Property<decimal>("AppliedAmount")
+                        .HasColumnType("numeric(18, 2)");
 
-                    b.Property<int>("AppliedRate")
-                        .HasColumnType("integer");
+                    b.Property<decimal>("AppliedRate")
+                        .HasColumnType("numeric(5, 2)");
 
                     b.Property<DateTime>("DateApplied")
                         .HasColumnType("timestamp with time zone");
@@ -63,6 +63,23 @@ namespace Loan_Management_System.Migrations
                     b.ToTable("AppliedLoans");
                 });
 
+            modelBuilder.Entity("Loan_Management_System.DTOs.File", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("character varying(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Files");
+                });
+
             modelBuilder.Entity("Loan_Management_System.DTOs.Loan", b =>
                 {
                     b.Property<int>("Id")
@@ -71,32 +88,38 @@ namespace Loan_Management_System.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("InterestRates")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("LogoPictureId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("LoanAmount")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<decimal>("MaxInterestRate")
+                        .HasColumnType("numeric(5,2)");
 
-                    b.Property<string>("Logo")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<decimal>("MaxLoanAmount")
+                        .HasColumnType("numeric(18,2)");
 
                     b.Property<int>("MinCreditScore")
                         .HasColumnType("integer");
 
+                    b.Property<decimal>("MinInterestRate")
+                        .HasColumnType("numeric(5,2)");
+
+                    b.Property<decimal>("MinLoanAmount")
+                        .HasColumnType("numeric(18,2)");
+
                     b.Property<decimal>("ProcessingFee")
-                        .HasColumnType("numeric");
+                        .HasColumnType("numeric(18,2)");
 
                     b.Property<decimal>("TermLength")
                         .HasColumnType("numeric");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(40)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LogoPictureId")
+                        .IsUnique();
 
                     b.ToTable("Loans");
                 });
@@ -111,40 +134,48 @@ namespace Loan_Management_System.Migrations
 
                     b.Property<string>("Designation")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(40)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(255)");
 
                     b.Property<string>("Employer")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(40)");
 
-                    b.Property<string>("Gender")
+                    b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(50)");
 
-                    b.Property<string>("Name")
+                    b.Property<int>("Gender")
+                        .HasColumnType("gender_enum");
+
+                    b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(128)");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("ProfilePictureFileId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("role_enum");
 
                     b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("numeric(18, 2)");
 
-                    b.Property<string>("UserPic")
+                    b.Property<string>("Salt")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(60)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfilePictureFileId")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -166,6 +197,37 @@ namespace Loan_Management_System.Migrations
                     b.Navigation("Loan");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Loan_Management_System.DTOs.Loan", b =>
+                {
+                    b.HasOne("Loan_Management_System.DTOs.File", "LogoPicture")
+                        .WithOne("Loan")
+                        .HasForeignKey("Loan_Management_System.DTOs.Loan", "LogoPictureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LogoPicture");
+                });
+
+            modelBuilder.Entity("Loan_Management_System.DTOs.User", b =>
+                {
+                    b.HasOne("Loan_Management_System.DTOs.File", "ProfilePicture")
+                        .WithOne("User")
+                        .HasForeignKey("Loan_Management_System.DTOs.User", "ProfilePictureFileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProfilePicture");
+                });
+
+            modelBuilder.Entity("Loan_Management_System.DTOs.File", b =>
+                {
+                    b.Navigation("Loan")
+                        .IsRequired();
+
+                    b.Navigation("User")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Loan_Management_System.DTOs.Loan", b =>

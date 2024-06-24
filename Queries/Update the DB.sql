@@ -131,3 +131,4 @@ ALTER TABLE "Users"
 DROP COLUMN "UserPic";
 --update logic to file upload
 
+ALTER TABLE "Loans" ALTER COLUMN "TermLength" TYPE numeric USING "TermLength"::numeric;

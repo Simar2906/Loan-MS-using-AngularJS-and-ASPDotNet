@@ -68,14 +68,15 @@ namespace Loan_Management_System.Controllers
             {
                 new Claim("id", userDetails.Id.ToString()),
                 new Claim("email", userDetails.Email),
-                new Claim("name", userDetails.Name),
-                new Claim("gender", userDetails.Gender),
+                new Claim("firstName", userDetails.FirstName),
+                new Claim("lastName", userDetails.LastName),
+                new Claim("gender", userDetails.Gender.ToString()),
                 new Claim("password", userDetails.Password),
-                new Claim("role", userDetails.Role),
+                new Claim("role", userDetails.Role.ToString()),
                 new Claim("salary", userDetails.Salary.ToString()),
                 new Claim("employer", userDetails.Employer),
                 new Claim("designation", userDetails.Designation),
-                new Claim("userPic", userDetails.UserPic)
+                new Claim("userPicPath", userDetails.ProfilePicture.FilePath)
             };
             var creds = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("abcdefgh12345678abcdefgh12345678")), SecurityAlgorithms.HmacSha256);
             var expires = DateTime.Now.AddDays(Convert.ToDouble(7));

@@ -1,5 +1,6 @@
 ﻿using Loan_Management_System.DTOs;
 using Microsoft.EntityFrameworkCore;
+using static Dapper.SqlMapper;
 
 namespace Loan_Management_System.Data
 {
@@ -13,26 +14,6 @@ namespace Loan_Management_System.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Loan> Loans { get; set; }
         public DbSet<AppliedLoan> AppliedLoans { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>()
-                .Property(u => u.Salary)
-                .HasColumnType("decimal(18, 2)");
-
-            modelBuilder.Entity<User>()
-                .Property(u => u.Email).HasColumnType("text");
-                base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<AppliedLoan>()
-                .HasOne(al => al.Loan)
-                .WithMany(l => l.AppliedLoans)
-                .HasForeignKey(al => al.LoanId);
-
-            modelBuilder.Entity<AppliedLoan>()
-                .HasOne(al => al.User)
-                .WithMany(u =>u.AppliedLoans)
-                .HasForeignKey(al => al.UserId);
-        }
+        public DbSet<DTOs.File> Files { get; set; }
     }
 }

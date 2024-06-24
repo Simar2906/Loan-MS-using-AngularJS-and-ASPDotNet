@@ -56,7 +56,7 @@ namespace Loan_Management_System.Controllers
         [HttpPost("applyNewLoan")]
         public IActionResult applyNewLoan([FromBody] AppliedLoan newLoan)
         {
-            newLoan.Status = 1;
+            newLoan.Status = Status.pending;
             newLoan.DateApplied = DateTime.Now;
             _loanRepo.ApplyNewLoan(newLoan);
             return Ok("Loan Applied Successfully!");
