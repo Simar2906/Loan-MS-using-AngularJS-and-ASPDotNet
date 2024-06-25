@@ -5,8 +5,8 @@
 <hr />
 <div ng-repeat="loan in appliedLoans">
     <h2>{{loan.title.toUpperCase()}}</h2>
-    <!--<p>{{loan.logo}}</p>-->
-    <img style="width:100px" src="{{loan.logo}}" />
+    <!--<p>{{loan.loanLogoPath.replace('src\\assets\\', 'assets/')}}</p>-->
+    <img style="width:100px" src="{{loan.loanLogoPath.replace('src\\assets\\', 'assets/')}}" />
     <table>
         <tr>
             <td>Applied Requested</td>

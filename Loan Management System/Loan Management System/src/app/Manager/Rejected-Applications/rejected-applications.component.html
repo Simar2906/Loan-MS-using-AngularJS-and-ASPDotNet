@@ -5,16 +5,16 @@
 <hr />
 <div ng-repeat="loan in rejcApps">
     <h2>{{loan.title.toUpperCase()}}</h2>
-    <img style="width:100px" src="{{loan.logo}}" />
-    <img class="userImage" src="{{loan.userPic}}" alt="Photo of User">
+    <img style="width:100px" src="{{loan.loanLogoPath.replace('src\\assets\\', 'assets/')}}" />
+    <img class="userImage" src="{{loan.userPicturePath.replace('src\\assets\\', 'assets/')}}" alt="Photo of User">
     <table>
         <tr>
             <td>Applicant:</td>
-            <td>{{loan.name}}</td>
+            <td>{{loan.firstName}} {{loan.lastName ? loan.lastName : ''}}</td>
         </tr>
         <tr>
             <td>Gender:</td>
-            <td>{{loan.gender}}</td>
+            <td>{{getGender(loan)}}</td>
         </tr>
         <tr>
             <td>Current Employer:</td>

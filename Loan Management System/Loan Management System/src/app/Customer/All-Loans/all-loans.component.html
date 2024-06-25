@@ -8,15 +8,23 @@
 <div ng-repeat="loan in allLoans">
     <h2>{{loan.title.toUpperCase()}}</h2>
     <!--<p>{{loan.logo}}</p>-->
-    <img style="width:100px" src="{{loan.logo}}" />
+    <img style="width:100px" src="{{loan.logoFilePath.replace('src\\assets\\', 'assets/')}}"/>
     <table>
         <tr>
-            <td>Loan Amount</td>
-            <td>{{loan.loanAmount}}</td>
+            <td>Minimun Loan Amount</td>
+            <td>{{loan.minLoanAmount}}</td>
         </tr>
         <tr>
-            <td>Interest Rates</td>
-            <td>{{loan.interestRates}}</td>
+            <td>Maximum Loan Amount</td>
+            <td>{{loan.maxLoanAmount}}</td>
+        </tr>
+        <tr>
+            <td>Minimun Interest Rates</td>
+            <td>{{loan.minInterestRate}}</td>
+        </tr>
+        <tr>
+            <td>Maximum Interest Rates</td>
+            <td>{{loan.maxInterestRate}}</td>
         </tr>
         <tr>
             <td>Min. Credit Score</td>

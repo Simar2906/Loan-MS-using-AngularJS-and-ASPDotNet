@@ -1,8 +1,10 @@
 ﻿using Loan_Management_System.Data;
+using Loan_Management_System.Models;
 using Loan_Management_System.Repository.LoanData;
 using Loan_Management_System.Repository.UserData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Npgsql;
 
 namespace Loan_Management_System
 {

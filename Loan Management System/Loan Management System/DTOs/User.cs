@@ -11,15 +11,13 @@ namespace Loan_Management_System.DTOs
 
         [Column(TypeName = "character varying(255)")]
         public string Email { get; set; }
-
-        [Column(TypeName = "gender_enum")]
         public Gender Gender { get; set; }
 
         [Column(TypeName = "character varying(50)")]
         public string FirstName { get; set; }
 
         [Column(TypeName = "character varying(50)")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [Column(TypeName = "character varying(128)")]
         public string Password { get; set; }
@@ -27,7 +25,6 @@ namespace Loan_Management_System.DTOs
         [Column(TypeName = "character varying(60)")]
         public string Salt { get; set; }
 
-        [Column(TypeName = "role_enum")]
         public Role Role { get; set; }
 
         [Column(TypeName = "numeric(18, 2)")]

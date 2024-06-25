@@ -69,7 +69,7 @@ namespace Loan_Management_System.Controllers
                 new Claim("id", userDetails.Id.ToString()),
                 new Claim("email", userDetails.Email),
                 new Claim("firstName", userDetails.FirstName),
-                new Claim("lastName", userDetails.LastName),
+                new Claim("lastName", userDetails.LastName ?? String.Empty),
                 new Claim("gender", userDetails.Gender.ToString()),
                 new Claim("password", userDetails.Password),
                 new Claim("role", userDetails.Role.ToString()),

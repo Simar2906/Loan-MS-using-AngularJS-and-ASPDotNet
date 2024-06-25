@@ -24,7 +24,7 @@
         if (token != null) {
             console.log('Login Found in session', token);
             var decoded = jwtHelper.decodeToken(token);
-            this.userName = decoded.name;
+            this.userName = decoded.firstName;
         }
     };
 

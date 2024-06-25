@@ -2,6 +2,7 @@
 using Loan_Management_System.DTOs;
 using Loan_Management_System.Models;
 using Microsoft.EntityFrameworkCore;
+using BCrypt.Net;
 
 namespace Loan_Management_System.Repository.UserData
 {
@@ -14,8 +15,17 @@ namespace Loan_Management_System.Repository.UserData
         }
         public async Task<User> GetUser(LoginFormData credentials)
         {
-            var user = await _dbContextEF.Users.FirstOrDefaultAsync(u => u.Email == credentials.email && u.Password == credentials.password);
-            return user;
+            var user = await _dbContextEF.Users.Include(u => u.ProfilePicture).FirstOrDefaultAsync(u => u.Email == credentials.email);
+            if (user == null)
+            {
+                return null;
+            }
+            //var encryptedPWD = BCrypt.Net.BCrypt.HashPassword(credentials.password, user.Salt);
+            if (BCrypt.Net.BCrypt.Verify(credentials.password, user.Password))
+            {
+                return user;
+            }
+            return null;
         }
         public async Task<User> CreateUser(User userData)
         {

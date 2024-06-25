@@ -6,7 +6,14 @@ pendingApplicationsController.$inject = ['$scope', 'LoanService'];
 function pendingApplicationsController($scope, LoanService) {
     var vm = $scope;
     vm.pendApps = [];
-
+    vm.getGender = function (loan) {
+        if (loan.gender == 0) {
+            return 'male';
+        }
+        else if (loan.gender == 1) {
+            return 'female';
+        }
+    }
     LoanService.apiResource.getAllPending().$promise
         .then(function (response) {
             vm.pendApps = response.loans;

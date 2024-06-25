@@ -19,8 +19,22 @@ namespace Loan_Management_System.Controllers
         [HttpGet("getAllLoans")]
         public async Task<IActionResult> getAllLoans()
         {
-            List<Loan> loans = await _loanRepo.GetAllLoans();
-            return Ok(new {loans});
+            List<Loan> allLoans = await _loanRepo.GetAllLoans();
+
+            List<LoanDTO> loans = allLoans.Select(l => new LoanDTO
+            {
+                Id = l.Id,
+                Title = l.Title,
+                MinCreditScore = l.MinCreditScore,
+                TermLength = l.TermLength,
+                ProcessingFee = l.ProcessingFee,
+                LogoFilePath = l.LogoPicture.FilePath,
+                MinLoanAmount = l.MinLoanAmount,
+                MaxLoanAmount = l.MaxLoanAmount,
+                MinInterestRate = l.MinInterestRate,
+                MaxInterestRate = l.MaxInterestRate
+            }).ToList();
+            return Ok(new { loans });
         }
         [HttpGet("getAllApplications")]
         public async Task<IActionResult> getAllApplications()

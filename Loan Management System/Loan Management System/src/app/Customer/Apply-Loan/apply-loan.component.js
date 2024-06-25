@@ -26,7 +26,8 @@ function applyLoanController($scope, LoanService, LoginService) {
         try {
             vm.applyingLoan = newValue;
             console.log('ApplyingLoan', vm.applyingLoan);
-            vm.range = vm.applyingLoan.interestRates.split('-').map(v => parseFloat(v.slice(0, -1)));
+            vm.loanRange = [vm.applyingLoan.minLoanAmount, vm.applyingLoan.maxLoanAmount];
+            vm.range = [vm.applyingLoan.minInterestRate, vm.applyingLoan.maxInterestRate];
             setValidators(vm);
         } catch (err) {
             console.log('loading');

@@ -9,7 +9,7 @@
         public string LastName { get; set; }
         public string Password { get; set; }
         public Role Role { get; set; }
-        public string UserPicturePath { get; set; }
+        public string UserPicturePath    { get; set; }
         public string LoanLogoPath { get; set; }
         public string Title { get; set; }
         public decimal MinLoanAmount { get; set; }

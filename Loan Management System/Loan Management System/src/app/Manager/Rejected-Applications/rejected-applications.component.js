@@ -6,7 +6,14 @@ rejectedApplicationsController.$inject = ['$scope', 'LoanService'];
 function rejectedApplicationsController($scope, LoanService) {
     var vm = $scope;
     vm.rejcApps = [];
-
+    vm.getGender = function (loan) {
+        if (loan.gender == 0) {
+            return 'male';
+        }
+        else if (loan.gender == 1) {
+            return 'female';
+        }
+    }
     LoanService.apiResource.getAllRejected().$promise
         .then(function (response) {
             vm.rejcApps = response.loans;

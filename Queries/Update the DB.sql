@@ -51,7 +51,7 @@ ALTER COLUMN "ProcessingFee" TYPE DECIMAL(18, 2) USING "ProcessingFee"::DECIMAL(
 ALTER TABLE "Loans"
   ALTER COLUMN "Title" TYPE VARCHAR(40);
 
-CREATE TYPE loan_status AS ENUM ('pending', 'approved', 'rejected');
+CREATE TYPE "Status" AS ENUM ('pending', 'approved', 'rejected');
 
 ALTER TABLE "AppliedLoans"
 ADD COLUMN "TempStatus" loan_status;
@@ -132,3 +132,20 @@ DROP COLUMN "UserPic";
 --update logic to file upload
 
 ALTER TABLE "Loans" ALTER COLUMN "TermLength" TYPE numeric USING "TermLength"::numeric;
+ALTER TYPE gender_enum RENAME TO "Gender";
+ALTER TYPE role_enum RENAME TO "Role";
+ALTER TYPE loan_status RENAME TO "Status";
+
+select n.nspname as enum_schema,  
+       t.typname as enum_name,  
+       e.enumlabel as enum_value
+from pg_type t 
+   join pg_enum e on t.oid = e.enumtypid  
+   join pg_catalog.pg_namespace n ON n.oid = t.typnamespace;
+
+ALTER TABLE files RENAME TO "Files";
+
+ALTER TABLE "Files" RENAME COLUMN id TO "Id";
+ALTER TABLE "Files" RENAME COLUMN "Filepath" TO "FilePath";
+
+ALTER TABLE "Loans" RENAME COLUMN logofileid TO "LogoFileId";

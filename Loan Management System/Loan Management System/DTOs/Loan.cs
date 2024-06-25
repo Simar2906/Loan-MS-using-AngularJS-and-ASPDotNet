@@ -17,10 +17,11 @@ namespace Loan_Management_System.DTOs
         [Column(TypeName = "numeric(18,2)")]
         public decimal ProcessingFee { get; set; }
 
-        public int LogoPictureId { get; set; }
+        public int LogoFileId { get; set; }
         
-        [ForeignKey(nameof(LogoPictureId))]
+        [ForeignKey(nameof(LogoFileId))]
         public File LogoPicture { get; set; }
+
         [Column(TypeName = "numeric(18,2)")]
         public decimal MinLoanAmount { get; set; }
         

@@ -26,7 +26,7 @@ namespace Loan_Management_System.Repository.LoanData
 
         public async Task<List<Loan>> GetAllLoans()
         {
-            return await _dbContextEF.Loans.ToListAsync();
+            return await _dbContextEF.Loans.Include(l => l.LogoPicture).ToListAsync();
         }
         public async Task<List<AppliedByUser>> GetAllApplications()
         {
@@ -65,54 +65,62 @@ namespace Loan_Management_System.Repository.LoanData
         }
         public async Task<List<AppliedByUser>> GetAllApproved()
         {
-            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 
-                               u.""Password"", u.""Role"", u.""UserPic"", l.""Logo"", l.""Title"", 
-                               l.""LoanAmount"", l.""InterestRates"", al.""AppliedAmount"", al.""AppliedRate"", 
+            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""FirstName"", u.""LastName"",
+                               u.""Password"", u.""Role"", u.""ProfilePictureFileId"", l.""LogoFileId"", l.""Title"", 
+                               l.""MinLoanAmount"", l.""MaxLoanAmount"", l.""MinInterestRate"", l.""MaxInterestRate"", al.""AppliedAmount"", al.""AppliedRate"", 
                                l.""MinCreditScore"", al.""TermLength"", l.""ProcessingFee"", u.""Employer"", u.""Salary"", 
-                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"" 
+                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"", uf.""FilePath"" AS ""UserPicturePath"", lf.""FilePath"" AS ""LoanLogoPath""
                         FROM public.""AppliedLoans"" al 
-                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId"" 
-                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId"" 
-                        WHERE al.""Status"" = 2";
+                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId""
+                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId""
+                        INNER JOIN public.""Files"" uf ON u.""ProfilePictureFileId"" = uf.""Id""
+                        INNER JOIN public.""Files"" lf ON l.""LogoFileId"" = lf.""Id"" 
+                        WHERE al.""Status"" = 'approved'";
             return (await _db.QueryAsync<AppliedByUser>(sql)).AsList();
         }
         public async Task<List<AppliedByUser>> GetAllPending()
         {
-            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 
-                               u.""Password"", u.""Role"", u.""UserPic"", l.""Logo"", l.""Title"", 
-                               l.""LoanAmount"", l.""InterestRates"", al.""AppliedAmount"", al.""AppliedRate"", 
+            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""FirstName"", u.""LastName"",
+                               u.""Password"", u.""Role"", u.""ProfilePictureFileId"", l.""LogoFileId"", l.""Title"", 
+                               l.""MinLoanAmount"", l.""MaxLoanAmount"", l.""MinInterestRate"", l.""MaxInterestRate"", al.""AppliedAmount"", al.""AppliedRate"", 
                                l.""MinCreditScore"", al.""TermLength"", l.""ProcessingFee"", u.""Employer"", u.""Salary"", 
-                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"" 
+                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"", uf.""FilePath"" AS ""UserPicturePath"", lf.""FilePath"" AS ""LoanLogoPath""
                         FROM public.""AppliedLoans"" al 
-                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId"" 
-                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId"" 
-                        WHERE al.""Status"" = 1";
+                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId""
+                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId""
+                        INNER JOIN public.""Files"" uf ON u.""ProfilePictureFileId"" = uf.""Id""
+                        INNER JOIN public.""Files"" lf ON l.""LogoFileId"" = lf.""Id""
+                        WHERE al.""Status"" = 'pending'";
             return (await _db.QueryAsync<AppliedByUser>(sql)).AsList();
         }
         public async Task<List<AppliedByUser>> GetAllRejected()
         {
-            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 
-                               u.""Password"", u.""Role"", u.""UserPic"", l.""Logo"", l.""Title"", 
-                               l.""LoanAmount"", l.""InterestRates"", al.""AppliedAmount"", al.""AppliedRate"", 
+            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""FirstName"", u.""LastName"",
+                               u.""Password"", u.""Role"", u.""ProfilePictureFileId"", l.""LogoFileId"", l.""Title"", 
+                               l.""MinLoanAmount"", l.""MaxLoanAmount"", l.""MinInterestRate"", l.""MaxInterestRate"", al.""AppliedAmount"", al.""AppliedRate"", 
                                l.""MinCreditScore"", al.""TermLength"", l.""ProcessingFee"", u.""Employer"", u.""Salary"", 
-                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"" 
+                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"", uf.""FilePath"" AS ""UserPicturePath"", lf.""FilePath"" AS ""LoanLogoPath""
                         FROM public.""AppliedLoans"" al 
-                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId"" 
-                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId"" 
-                        WHERE al.""Status"" = 3";
+                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId""
+                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId""
+                        INNER JOIN public.""Files"" uf ON u.""ProfilePictureFileId"" = uf.""Id""
+                        INNER JOIN public.""Files"" lf ON l.""LogoFileId"" = lf.""Id""
+                        WHERE al.""Status"" = 'rejected'";
             return (await _db.QueryAsync<AppliedByUser>(sql)).AsList();
         }
 
         public async Task<List<AppliedByUser>> GetLoansByUser(int userId)
         {
-            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""Name"", 
-                               u.""Password"", u.""Role"", u.""UserPic"", l.""Logo"", l.""Title"", 
-                               l.""LoanAmount"", l.""InterestRates"", al.""AppliedAmount"", al.""AppliedRate"", 
+            var sql = @"SELECT al.""Id"", u.""Email"", u.""Gender"", u.""FirstName"", u.""LastName"",
+                               u.""Password"", u.""Role"", u.""ProfilePictureFileId"", l.""LogoFileId"", l.""Title"", 
+                               l.""MinLoanAmount"", l.""MaxLoanAmount"", l.""MinInterestRate"", l.""MaxInterestRate"", al.""AppliedAmount"", al.""AppliedRate"", 
                                l.""MinCreditScore"", al.""TermLength"", l.""ProcessingFee"", u.""Employer"", u.""Salary"", 
-                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"" 
+                               u.""Designation"", al.""Status"", al.""DateApplied"", al.""LoanId"", uf.""FilePath"" AS ""UserPicturePath"", lf.""FilePath"" AS ""LoanLogoPath""
                         FROM public.""AppliedLoans"" al 
-                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId"" 
-                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId"" 
+                        LEFT JOIN public.""Users"" u ON u.""Id"" = al.""UserId""
+                        LEFT JOIN public.""Loans"" l ON l.""Id"" = al.""LoanId""
+                        INNER JOIN public.""Files"" uf ON u.""ProfilePictureFileId"" = uf.""Id""
+                        INNER JOIN public.""Files"" lf ON l.""LogoFileId"" = lf.""Id""
                         WHERE al.""UserId"" = @UserId";
 
             return (await _db.QueryAsync<AppliedByUser>(sql, new { UserId = userId })).AsList();
@@ -122,15 +130,14 @@ namespace Loan_Management_System.Repository.LoanData
         {
             var sql = @"INSERT INTO public.""AppliedLoans""(""UserId"", ""AppliedAmount"",
 								  ""AppliedRate"", ""TermLength"", ""Status"", ""DateApplied"", ""LoanId"")
-			VALUES(@UserId, @AppliedAmount, @AppliedRate, @TermLength, @Status, @DateApplied, @LoanId);";
-
+			VALUES(@UserId, @AppliedAmount, @AppliedRate, @TermLength, @Status::""Status"", @DateApplied, @LoanId);";
             _db.Execute(sql, new
             {
                 UserId = newLoan.UserId,
                 AppliedAmount = newLoan.AppliedAmount,
                 AppliedRate = newLoan.AppliedRate,
                 TermLength = newLoan.TermLength,
-                Status = newLoan.Status,
+                Status = newLoan.Status.ToString(),
                 DateApplied = newLoan.DateApplied,
                 LoanId = newLoan.LoanId
             });
@@ -139,7 +146,7 @@ namespace Loan_Management_System.Repository.LoanData
 
         public void ApproveLoan(int loanId)
         {
-            var sql = @"UPDATE public.""AppliedLoans"" SET ""Status"" = 2 WHERE ""Id"" = @loanId";
+            var sql = @"UPDATE public.""AppliedLoans"" SET ""Status"" = 'approved' WHERE ""Id"" = @loanId";
             _db.Execute(sql, new
             {
                 loanId = loanId

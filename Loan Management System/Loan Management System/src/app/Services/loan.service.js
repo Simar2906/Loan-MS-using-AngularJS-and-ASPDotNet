@@ -12,13 +12,13 @@
 
     this.getLoanStatus = function (loan) {
         switch (loan.status) {
-            case 1:
+            case 0:
                 return "Pending";
                 break;
-            case 2:
+            case 1:
                 return "Approved";
                 break;
-            case 3:
+            case 2:
                 return "Rejected";
             default:
                 return null;

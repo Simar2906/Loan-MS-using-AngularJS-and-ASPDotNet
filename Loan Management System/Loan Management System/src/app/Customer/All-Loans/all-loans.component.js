@@ -30,4 +30,8 @@ function allLoansController($scope, LoanService) {
     vm.applyNowClicked = function(loanDetails){
         LoanService.applyNewLoanClicked(loanDetails);
     }
+    vm.getPath = function (path) {
+        var newPath = "../../../" + path;
+        return newPath;
+    }
 }

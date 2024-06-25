@@ -17,7 +17,9 @@ namespace Loan_Management_System.DTOs
         public decimal AppliedRate { get; set; }
 
         public int TermLength { get; set; }
-        public Status Status { get;set; } //1 - pending, 2 - approved, 3 - rejected
+
+        [Column(TypeName = "Status")]
+        public Status Status { get;set; } //0 - pending, 1 - approved, 2 - rejected
         public DateTime DateApplied { get; set; }
         public int LoanId { get; set; }
 
