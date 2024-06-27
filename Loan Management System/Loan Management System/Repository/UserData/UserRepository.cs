@@ -22,37 +22,16 @@ namespace Loan_Management_System.Repository.UserData
         public async Task<User> GetUser(LoginFormData credentials)
         {
             var user = await _dbContextEF.Users.Include(u => u.ProfilePicture).FirstOrDefaultAsync(u => u.Email == credentials.email);
-            if (user == null)
-            {
-                return null;
-            }
-            //var encryptedPWD = BCrypt.Net.BCrypt.HashPassword(credentials.password, user.Salt);
-            if (BCrypt.Net.BCrypt.Verify(credentials.password, user.Password))
-            {
-                return user;
-            }
-            return null;
+            return user;
         }
-        public async Task<User> CreateUser(SignupDTO userData)
+        public async Task<DTOs.File> SaveFile(DTOs.File profilePicture)
         {
-            string base64String = userData.UserPic;
-
-            // Remove the prefix if it exists
-            string base64Data = base64String.Substring(base64String.IndexOf(',') + 1);
-
-            string uniqueFileName = await SaveFileAsync(Convert.FromBase64String(base64Data), userData.FileName);
-
-            DTOs.File profilePicture = new DTOs.File
-            {
-                FilePath = uniqueFileName
-            };
             _dbContextEF.Files.Add(profilePicture);
             await _dbContextEF.SaveChangesAsync();
-
-            int profilePictureId = profilePicture.Id;
-            string salt = BCrypt.Net.BCrypt.GenerateSalt();
-            // Hash the existing password with the generated salt
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userData.Password, salt);
+            return profilePicture;
+        }
+        public async Task<User> AddUser(SignupDTO userData, string hashedPassword, string salt, int profilePictureId)
+        {
             var parameters = new
             {
                 Email = userData.Email,
@@ -67,64 +46,28 @@ namespace Loan_Management_System.Repository.UserData
                 Salt = salt,
                 ProfilePictureFileId = profilePictureId // assuming profilePictureId is already generated
             };
-            try
-            {
-
             string sql = @"
         INSERT INTO ""Users"" (""Designation"", ""Email"", ""Employer"", ""FirstName"", ""LastName"", ""Password"", ""Gender"", ""Role"", ""Salary"", ""Salt"", ""ProfilePictureFileId"")
         VALUES (@Designation, @Email, @Employer, @FirstName, @LastName, @Password, @Gender::""Gender"", @Role::""Role"", @Salary, @Salt, @ProfilePictureFileId)"; // If using SQL Server to get the last inserted id
             _db.Execute(sql, parameters);
-                var user = await _dbContextEF.Users.FirstOrDefaultAsync(u => u.Email == userData.Email && u.Password == hashedPassword);
-                return user;
-            }
-            catch(Exception ex) { }
-            return null;
+            var user = await _dbContextEF.Users.FirstOrDefaultAsync(u => u.Email == userData.Email && u.Password == hashedPassword);
+            return user;
         }
-        private async Task<string> SaveFileAsync(byte[] fileBytes, string fileName)
-        {
-            string projectRoot = Directory.GetCurrentDirectory();
-            string uploadsFolder = Path.Combine(projectRoot, "src", "assets");
-
-            // Ensure uploadsFolder exists; create if it doesn't
-            if (!Directory.Exists(uploadsFolder))
-            {
-                Directory.CreateDirectory(uploadsFolder);
-            }
-
-            string uniqueFileName = null;
-
-            if (fileBytes != null && fileBytes.Length > 0)
-            {
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + fileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                // Write file to disk
-                await System.IO.File.WriteAllBytesAsync(filePath, fileBytes);
-
-                uniqueFileName = Path.Combine("src", "assets", uniqueFileName);
-
-
-            }
-            return uniqueFileName;
-        }
+        
         public async Task DeleteUser(int userId)
         {
-            try
-            {
-                var user = await _dbContextEF.Users
-                .Include(u => u.AppliedLoans)
-                .Include(u => u.ProfilePicture)// Include loans to delete them too
-                .FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _dbContextEF.Users
+            .Include(u => u.AppliedLoans)
+            .Include(u => u.ProfilePicture)// Include loans to delete them too
+            .FirstOrDefaultAsync(u => u.Id == userId);
 
-                if (user != null)
-                {
-                    _dbContextEF.AppliedLoans.RemoveRange(user.AppliedLoans);
-                    _dbContextEF.Files.RemoveRange(user.ProfilePicture);
-                    _dbContextEF.Users.Remove(user);
-                    await _dbContextEF.SaveChangesAsync();
-                }
+            if (user != null)
+            {
+                _dbContextEF.AppliedLoans.RemoveRange(user.AppliedLoans);
+                _dbContextEF.Files.RemoveRange(user.ProfilePicture);
+                _dbContextEF.Users.Remove(user);
+                await _dbContextEF.SaveChangesAsync();
             }
-            catch(Exception ex) { }
         }
     }
 }

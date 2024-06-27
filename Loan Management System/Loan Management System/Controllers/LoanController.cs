@@ -1,6 +1,7 @@
 ﻿using Loan_Management_System.DTOs;
 using Loan_Management_System.Models;
 using Loan_Management_System.Repository.LoanData;
+using Loan_Management_System.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,89 +11,142 @@ namespace Loan_Management_System.Controllers
     [ApiController]
     public class LoanController : ControllerBase
     {
-        public readonly LoanRepository _loanRepo;
+        public readonly LoanService _loanSvc;
 
-        public LoanController(LoanRepository loanRepo)
+        public LoanController(LoanService loanSvc)
         {
-            _loanRepo = loanRepo;
+            _loanSvc = loanSvc;
         }
         [HttpGet("getAllLoans")]
         public async Task<IActionResult> getAllLoans()
         {
-            List<Loan> allLoans = await _loanRepo.GetAllLoans();
-
-            List<LoanDTO> loans = allLoans.Select(l => new LoanDTO
+            try
             {
-                Id = l.Id,
-                Title = l.Title,
-                MinCreditScore = l.MinCreditScore,
-                TermLength = l.TermLength,
-                ProcessingFee = l.ProcessingFee,
-                LogoFilePath = l.LogoPicture.FilePath,
-                MinLoanAmount = l.MinLoanAmount,
-                MaxLoanAmount = l.MaxLoanAmount,
-                MinInterestRate = l.MinInterestRate,
-                MaxInterestRate = l.MaxInterestRate
-            }).ToList();
-            return Ok(new { loans });
+                List<LoanDTO> loans = await _loanSvc.GetAllLoans();
+                return Ok(new { loans });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
         [HttpGet("getAllApplications")]
         public async Task<IActionResult> getAllApplications()
         {
-            List<AppliedByUser> loans = await _loanRepo.GetAllApplications();
-            return Ok(new { loans });
+            try
+            {
+                List<AppliedByUser> loans = await _loanSvc.GetAllApplications();
+                return Ok(new { loans });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
         [HttpGet("getAllApproved")]
         public async Task<IActionResult> getAllApproved()
         {
-            List<AppliedByUser> loans = await _loanRepo.GetAllApproved();
-            return Ok(new { loans });
+            try
+            {
+                List<AppliedByUser> loans = await _loanSvc.GetAllApproved();
+                return Ok(new { loans });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
         [HttpGet("getAllPending")]
         public async Task<IActionResult> getAllPending()
         {
-            List<AppliedByUser> loans = await _loanRepo.GetAllPending();
-            return Ok(new { loans });
+            try
+            {
+                List<AppliedByUser> loans = await _loanSvc.GetAllPending();
+                return Ok(new { loans });
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
         [HttpGet("getAllRejected")]
         public async Task<IActionResult> getAllRejected()
         {
-            List<AppliedByUser> loans = await _loanRepo.GetAllRejected();
-            return Ok(new { loans });
+            try
+            {
+                List<AppliedByUser> loans = await _loanSvc.GetAllRejected();
+                return Ok(new { loans });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
         [HttpGet("getLoansByUser")]
         public async Task<IActionResult> getLoansByUser(int userId)
         {
-            Console.WriteLine(userId);
-            List<AppliedByUser> loanList = await _loanRepo.GetLoansByUser(userId);
-            return Ok(new { loanList });
+            try
+            {
+                List<AppliedByUser> loanList = await _loanSvc.GetLoansByUser(userId);
+                return Ok(new { loanList });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
         [HttpPost("applyNewLoan")]
-        public IActionResult applyNewLoan([FromBody] AppliedLoan newLoan)
+        public async Task<IActionResult> applyNewLoan([FromBody] AppliedLoan newLoan)
         {
-            newLoan.Status = Status.pending;
-            newLoan.DateApplied = DateTime.Now;
-            _loanRepo.ApplyNewLoan(newLoan);
-            return Ok("Loan Applied Successfully!");
+            try
+            {
+                await _loanSvc.ApplyNewLoan(newLoan);
+                return Ok("Loan Applied Successfully!");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
 
         [HttpPatch("approveLoan")]
-        public IActionResult approveLoan(int loanId)
+        public async Task<IActionResult> approveLoan(int loanId)
         {
-            _loanRepo.ApproveLoan(loanId);
-            return Ok("Loan Approved");
+            try
+            {
+                await _loanSvc.ApproveLoan(loanId);
+                return Ok("Loan Approved");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
         [HttpPatch("rejectLoan")]
-        public IActionResult rejectLoan(int loanId)
+        public async Task<IActionResult> rejectLoan(int loanId)
         {
-            _loanRepo.RejectLoan(loanId);
-            return Ok("Loan Rejected");
+            try
+            {
+                await _loanSvc.RejectLoan(loanId);
+                return Ok("Loan Rejected");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
         [HttpDelete("deleteLoan")]
-        public IActionResult deleteLoan(int loanId)
+        public async Task<IActionResult> deleteLoan(int loanId)
         {
-            _loanRepo.DeleteLoan(loanId);
-            return Ok("Loan Deleted");
+            try
+            {
+                await _loanSvc.DeleteLoan(loanId);
+                return Ok("Loan Deleted");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
     }
 }

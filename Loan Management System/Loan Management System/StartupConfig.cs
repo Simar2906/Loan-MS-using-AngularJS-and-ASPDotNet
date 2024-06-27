@@ -2,6 +2,7 @@
 using Loan_Management_System.Models;
 using Loan_Management_System.Repository.LoanData;
 using Loan_Management_System.Repository.UserData;
+using Loan_Management_System.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Npgsql;
@@ -28,6 +29,9 @@ namespace Loan_Management_System
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<UserRepository>();
             services.AddScoped<LoanRepository>();
+            services.AddTransient<UserService>();
+            services.AddTransient<LoanService>();
+
             services.AddControllers();
         }
 

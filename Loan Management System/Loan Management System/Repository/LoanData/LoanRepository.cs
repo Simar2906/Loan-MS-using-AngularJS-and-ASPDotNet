@@ -121,7 +121,7 @@ namespace Loan_Management_System.Repository.LoanData
             return (await _db.QueryAsync<AppliedByUser>(sql, new { UserId = userId })).AsList();
         }
 
-        public void ApplyNewLoan(AppliedLoan newLoan)
+        public async Task ApplyNewLoan(AppliedLoan newLoan)
         {
             var sql = @"INSERT INTO public.""AppliedLoans""(""UserId"", ""AppliedAmount"",
 								  ""AppliedRate"", ""TermLength"", ""Status"", ""DateApplied"", ""LoanId"")
@@ -139,7 +139,7 @@ namespace Loan_Management_System.Repository.LoanData
             return;
         }
 
-        public void ApproveLoan(int loanId)
+        public async Task ApproveLoan(int loanId)
         {
             var sql = @"UPDATE public.""AppliedLoans"" SET ""Status"" = 'approved' WHERE ""Id"" = @loanId";
             _db.Execute(sql, new
@@ -147,7 +147,7 @@ namespace Loan_Management_System.Repository.LoanData
                 loanId = loanId
             });
         }
-        public void RejectLoan(int loanId)
+        public async Task RejectLoan(int loanId)
         {
             var sql = @"UPDATE public.""AppliedLoans"" SET ""Status"" = 'rejected' WHERE ""Id"" = @loanId";
             _db.Execute(sql, new
@@ -155,7 +155,7 @@ namespace Loan_Management_System.Repository.LoanData
                 loanId = loanId
             });
         }
-        public void DeleteLoan(int loanId)
+        public async Task DeleteLoan(int loanId)
         {
             var sql = @"DELETE FROM public.""AppliedLoans"" WHERE ""Id"" = @loanId";
 
