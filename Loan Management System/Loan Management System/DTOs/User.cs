@@ -11,6 +11,8 @@ namespace Loan_Management_System.DTOs
 
         [Column(TypeName = "character varying(255)")]
         public string Email { get; set; }
+
+        [Column(TypeName = "Gender")]
         public Gender Gender { get; set; }
 
         [Column(TypeName = "character varying(50)")]
@@ -25,6 +27,7 @@ namespace Loan_Management_System.DTOs
         [Column(TypeName = "character varying(60)")]
         public string Salt { get; set; }
 
+        [Column(TypeName = "Role")]
         public Role Role { get; set; }
 
         [Column(TypeName = "numeric(18, 2)")]

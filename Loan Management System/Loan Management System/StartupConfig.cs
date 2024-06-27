@@ -33,6 +33,10 @@ namespace Loan_Management_System
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            optionsBuilder.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
+                          .EnableSensitiveDataLogging() // Enable this for debugging purposes
+                          .LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

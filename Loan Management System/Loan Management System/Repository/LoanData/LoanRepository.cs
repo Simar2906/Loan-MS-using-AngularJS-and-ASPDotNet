@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Threading.Tasks;
+﻿using System.Data;
 using Dapper;
 using Loan_Management_System.Data;
 using Loan_Management_System.DTOs;
 using Loan_Management_System.Models;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Npgsql;
 
 namespace Loan_Management_System.Repository.LoanData
@@ -154,13 +149,11 @@ namespace Loan_Management_System.Repository.LoanData
         }
         public void RejectLoan(int loanId)
         {
-            var loan = _dbContextEF.AppliedLoans.FirstOrDefault(l => l.Id == loanId);
-
-            if(loan != null)
+            var sql = @"UPDATE public.""AppliedLoans"" SET ""Status"" = 'rejected' WHERE ""Id"" = @loanId";
+            _db.Execute(sql, new
             {
-                loan.Status = Status.rejected;
-                _dbContextEF.SaveChanges();
-            }
+                loanId = loanId
+            });
         }
         public void DeleteLoan(int loanId)
         {

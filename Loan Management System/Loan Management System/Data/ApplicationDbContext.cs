@@ -33,11 +33,18 @@ namespace Loan_Management_System.Data
                     .HasConversion<string>();
             });
 
-            modelBuilder.Entity<AppliedLoan>(entity =>
-            {
-                entity.Property(l=> l.Status)
-                    .HasConversion<string>();
-            });
+            //modelBuilder.Entity<AppliedLoan>(entity =>
+            //{
+            //    entity.Property(l=> l.Status)
+            //        .HasConversion<string>();
+            //});
+            modelBuilder.Entity<AppliedLoan>()
+                .Property(al => al.Status)
+                .HasConversion(
+                    v => v.ToString(), // Convert to string for storing in the database
+                    v => (Status)Enum.Parse(typeof(Status), v) // Convert to enum when reading from the database
+                )
+                .HasColumnType("Status"); // Explicitly specify the column type
         }
     }
 }

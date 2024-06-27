@@ -21,7 +21,7 @@ namespace Loan_Management_System.Controllers
             _userRepo = userRepo;
         }
         [HttpPost("CreateUser")]
-        public async Task<IActionResult> CreateUser([FromBody] User userData)
+        public async Task<IActionResult> CreateUser([FromBody] SignupDTO userData)
         {
             try
             {

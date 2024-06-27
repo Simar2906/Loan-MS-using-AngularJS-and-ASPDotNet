@@ -11,13 +11,29 @@ function signupController($scope, LoginService, $location) {
     vm.userData = {
         Email: '',
         Gender: '',
-        Name: '',
+        FirstName: '',
+        LastName: '',
         Password: '',
         Role: '',
         Salary: 0,
         Employer: '',
         Designation: '',
         UserPic: '',
+        FileName: ''
+    };
+    vm.setFile = function (element) {
+        vm.$apply(function () {
+            var file = element.files[0];
+            var reader = new FileReader();
+            vm.userData.FileName = file.name;
+            reader.onload = function (e) {
+                vm.userData.UserPic = e.target.result;
+
+                vm.$digest();
+            };
+
+            reader.readAsDataURL(file);
+        });
     };
 
     vm.signupProcedure = function () {
@@ -44,8 +60,7 @@ function signupController($scope, LoginService, $location) {
             })
             .catch(function (error) {
                 console.log(error);
-                alert('User Not found!');
-                vm.loginData.password = '';
+                alert('Couldn\'t Create User!');
             });
     };
 }
