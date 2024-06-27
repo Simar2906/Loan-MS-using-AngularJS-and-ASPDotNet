@@ -21,7 +21,7 @@ namespace Loan_Management_System.Services
             string base64String = userData.UserPic;
             string base64Data = base64String.Substring(base64String.IndexOf(',') + 1);
             string uniqueFileName = await SaveFileAsync(Convert.FromBase64String(base64Data), userData.FileName);
-            DTOs.File profilePicture = new DTOs.File
+            Models.File profilePicture = new Models.File
             {
                 FilePath = uniqueFileName
             };

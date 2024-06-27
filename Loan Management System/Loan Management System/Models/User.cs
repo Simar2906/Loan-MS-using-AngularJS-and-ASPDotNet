@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Loan_Management_System.Models;
 
-namespace Loan_Management_System.DTOs
+namespace Loan_Management_System.Models
 {
     public class User
     {

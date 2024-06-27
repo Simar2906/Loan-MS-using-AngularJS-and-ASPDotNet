@@ -1,4 +1,4 @@
-﻿namespace Loan_Management_System.Models
+﻿namespace Loan_Management_System.DTOs
 {
     public class LoginFormData
     {

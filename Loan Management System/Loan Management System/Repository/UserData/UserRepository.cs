@@ -24,7 +24,7 @@ namespace Loan_Management_System.Repository.UserData
             var user = await _dbContextEF.Users.Include(u => u.ProfilePicture).FirstOrDefaultAsync(u => u.Email == credentials.email);
             return user;
         }
-        public async Task<DTOs.File> SaveFile(DTOs.File profilePicture)
+        public async Task<Models.File> SaveFile(Models.File profilePicture)
         {
             _dbContextEF.Files.Add(profilePicture);
             await _dbContextEF.SaveChangesAsync();

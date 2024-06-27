@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Text;
 using Loan_Management_System.Data;
 using Loan_Management_System.DTOs;
-using Loan_Management_System.Models;
 using Loan_Management_System.Repository.UserData;
 using Loan_Management_System.Services;
 using Microsoft.AspNetCore.Http;

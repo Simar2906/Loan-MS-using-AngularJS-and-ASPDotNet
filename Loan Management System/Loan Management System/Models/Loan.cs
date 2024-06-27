@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Loan_Management_System.DTOs
+namespace Loan_Management_System.Models
 {
     public class Loan
     {
@@ -18,19 +18,19 @@ namespace Loan_Management_System.DTOs
         public decimal ProcessingFee { get; set; }
 
         public int LogoFileId { get; set; }
-        
+
         [ForeignKey(nameof(LogoFileId))]
         public File LogoPicture { get; set; }
 
         [Column(TypeName = "numeric(18,2)")]
         public decimal MinLoanAmount { get; set; }
-        
+
         [Column(TypeName = "numeric(18,2)")]
         public decimal MaxLoanAmount { get; set; }
 
         [Column(TypeName = "numeric(5,2)")]
         public decimal MinInterestRate { get; set; }
-        
+
         [Column(TypeName = "numeric(5,2)")]
         public decimal MaxInterestRate { get; set; }
 

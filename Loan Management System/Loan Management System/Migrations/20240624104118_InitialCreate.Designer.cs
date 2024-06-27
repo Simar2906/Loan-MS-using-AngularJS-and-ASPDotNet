@@ -63,7 +63,7 @@ namespace Loan_Management_System.Migrations
                     b.ToTable("AppliedLoans");
                 });
 
-            modelBuilder.Entity("Loan_Management_System.DTOs.File", b =>
+            modelBuilder.Entity("Loan_Management_System.Models.File", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -201,7 +201,7 @@ namespace Loan_Management_System.Migrations
 
             modelBuilder.Entity("Loan_Management_System.DTOs.Loan", b =>
                 {
-                    b.HasOne("Loan_Management_System.DTOs.File", "LogoPicture")
+                    b.HasOne("Loan_Management_System.Models.File", "LogoPicture")
                         .WithOne("Loan")
                         .HasForeignKey("Loan_Management_System.DTOs.Loan", "LogoPictureId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -212,7 +212,7 @@ namespace Loan_Management_System.Migrations
 
             modelBuilder.Entity("Loan_Management_System.DTOs.User", b =>
                 {
-                    b.HasOne("Loan_Management_System.DTOs.File", "ProfilePicture")
+                    b.HasOne("Loan_Management_System.Models.File", "ProfilePicture")
                         .WithOne("User")
                         .HasForeignKey("Loan_Management_System.DTOs.User", "ProfilePictureFileId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -221,7 +221,7 @@ namespace Loan_Management_System.Migrations
                     b.Navigation("ProfilePicture");
                 });
 
-            modelBuilder.Entity("Loan_Management_System.DTOs.File", b =>
+            modelBuilder.Entity("Loan_Management_System.Models.File", b =>
                 {
                     b.Navigation("Loan")
                         .IsRequired();

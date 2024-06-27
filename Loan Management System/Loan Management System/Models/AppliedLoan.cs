@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Loan_Management_System.Models;
 
-namespace Loan_Management_System.DTOs
+namespace Loan_Management_System.Models
 {
     public class AppliedLoan
     {
@@ -19,11 +18,11 @@ namespace Loan_Management_System.DTOs
         public int TermLength { get; set; }
 
         [Column(TypeName = "Status")]
-        public Status Status { get;set; } //0 - pending, 1 - approved, 2 - rejected
+        public Status Status { get; set; } //0 - pending, 1 - approved, 2 - rejected
         public DateTime DateApplied { get; set; }
         public int LoanId { get; set; }
 
-        [ForeignKey(nameof(LoanId))]    
+        [ForeignKey(nameof(LoanId))]
         public Loan? Loan { get; set; }
 
         [ForeignKey(nameof(UserId))]
